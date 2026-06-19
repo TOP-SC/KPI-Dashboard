@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "nota": "Precios orientativos USD/año (planes SMB o mid-market). Referencias públicas 2025-2026. No usa columnas del Drive.",
+  "apps": {
+    "power_automate": {
+      "nombre": "Microsoft Power Automate",
+      "categoria": "automatizacion_alertas",
+      "keywords": ["aviso", "alerta", "ncp", "opc", "notific", "slack", "teams", "workflow"],
+      "usd_anual": 900,
+      "pricing_ref": "Power Automate Premium ~USD 15/usuario/mes (ref. 5 usuarios)"
+    },
+    "make": {
+      "nombre": "Make (Integromat)",
+      "categoria": "automatizacion_alertas",
+      "keywords": ["integracion", "low-code", "automation", "webhook"],
+      "usd_anual": 636,
+      "pricing_ref": "Plan Teams ~USD 53/mes"
+    },
+    "sap_gts": {
+      "nombre": "SAP Global Trade Services (GTS)",
+      "categoria": "comex",
+      "keywords": ["comex", "aduana", "import", "export", "trade", "customs"],
+      "usd_anual": 18000,
+      "pricing_ref": "Licencia mid-market anual estimada (SAP GTS / compliance comercio exterior)"
+    },
+    "descartes": {
+      "nombre": "Descartes CustomsInfo",
+      "categoria": "comex",
+      "keywords": ["despacho", "maria", "afip", "aduanero"],
+      "usd_anual": 12000,
+      "pricing_ref": "Suscripción anual referencia mercado compliance aduanero"
+    },
+    "importgenius": {
+      "nombre": "ImportGenius",
+      "categoria": "inteligencia_importaciones",
+      "keywords": ["competencia", "importacion", "importaciones", "inteligencia", "panjiva"],
+      "usd_anual": 2388,
+      "pricing_ref": "Plan Business ~USD 199/mes"
+    },
+    "zoho_inventory": {
+      "nombre": "Zoho Inventory",
+      "categoria": "inventario",
+      "keywords": ["inventario", "insumo", "stock", "sku", "almacen"],
+      "usd_anual": 948,
+      "pricing_ref": "Plan Professional ~USD 79/mes"
+    },
+    "cin7": {
+      "nombre": "Cin7 Core",
+      "categoria": "inventario",
+      "keywords": ["planilla", "valorizado", "existencias", "erp inventario"],
+      "usd_anual": 3900,
+      "pricing_ref": "Plan Standard ~USD 325/mes"
+    },
+    "route4me": {
+      "nombre": "Route4Me",
+      "categoria": "logistica_rutas",
+      "keywords": ["ruta", "hoja de ruta", "flota", "reparto", "delivery"],
+      "usd_anual": 2988,
+      "pricing_ref": "Plan Route Management ~USD 249/mes"
+    },
+    "scandit": {
+      "nombre": "Scandit (Barcode SDK)",
+      "categoria": "escaneo",
+      "keywords": ["escaneo", "barcode", "scanner", "sku", "codigo de barras"],
+      "usd_anual": 2500,
+      "pricing_ref": "Licencia dev + uso anual estimado SMB"
+    },
+    "factorial": {
+      "nombre": "Factorial HR",
+      "categoria": "rrhh",
+      "keywords": ["almuerzo", "comedor", "presentismo", "uniforme", "rrhh", "empleado", "recibo"],
+      "usd_anual": 3000,
+      "pricing_ref": "Plan Business ~USD 5/usuario/mes (ref. 50 usuarios)"
+    },
+    "bamboohr": {
+      "nombre": "BambooHR",
+      "categoria": "rrhh",
+      "keywords": ["presentismo", "time tracking", "asistencia"],
+      "usd_anual": 2400,
+      "pricing_ref": "Plan Essentials + time tracking (~USD 200/mes ref.)"
+    },
+    "jira_sm": {
+      "nombre": "Jira Service Management",
+      "categoria": "mesa_servicios",
+      "keywords": ["solicitud", "top", "agente", "ia", "mesa", "ticket", "helpdesk"],
+      "usd_anual": 2400,
+      "pricing_ref": "Standard ~USD 20/agente/mes (ref. 10 agentes)"
+    },
+    "relex": {
+      "nombre": "RELEX Solutions",
+      "categoria": "abastecimiento",
+      "keywords": ["abastecimiento", "replenishment", "retail", "sucursal"],
+      "usd_anual": 35000,
+      "pricing_ref": "Suite supply chain retail (mid-market, anual estimado)"
+    },
+    "sap_concur": {
+      "nombre": "SAP Concur",
+      "categoria": "gastos",
+      "keywords": ["gasto", "rendicion", "expense", "ff", "fondo fijo"],
+      "usd_anual": 9600,
+      "pricing_ref": "~USD 8/usuario/mes (ref. 100 usuarios)"
+    },
+    "crayon": {
+      "nombre": "Crayon",
+      "categoria": "inteligencia_competitiva",
+      "keywords": ["mapping", "competitivo", "competencia", "plan com"],
+      "usd_anual": 15000,
+      "pricing_ref": "Inteligencia competitiva B2B (anual estimado SMB+)"
+    },
+    "retail_pro": {
+      "nombre": "Retail Pro Prism",
+      "categoria": "retail_operaciones",
+      "keywords": ["mr", "operativa", "pos", "retail", "tienda"],
+      "usd_anual": 6000,
+      "pricing_ref": "Licencia retail POS/operaciones (anual ref.)"
+    },
+    "netsuite_costing": {
+      "nombre": "Oracle NetSuite (Costing)",
+      "categoria": "costos",
+      "keywords": ["costo", "sku", "ecuacion", "costing", "margen"],
+      "usd_anual": 12000,
+      "pricing_ref": "NetSuite base + módulo costing (anual ref. mid-market)"
+    },
+    "project44": {
+      "nombre": "project44 (Visibility)",
+      "categoria": "logistica_fletes",
+      "keywords": ["flete", "envio", "logistica", "transporte", "carrier", "tms"],
+      "usd_anual": 18000,
+      "pricing_ref": "Visibilidad logística / TMS cloud (anual estimado)"
+    },
+    "docuware": {
+      "nombre": "DocuWare",
+      "categoria": "gestion_documental",
+      "keywords": ["mesa de entrada", "documento", "digitalizacion", "captura"],
+      "usd_anual": 3600,
+      "pricing_ref": "Plan cloud document management (~USD 300/mes ref.)"
+    },
+    "fiix": {
+      "nombre": "Fiix CMMS",
+      "categoria": "mantenimiento",
+      "keywords": ["mantenimiento", "cmms", "activo", "work order"],
+      "usd_anual": 10800,
+      "pricing_ref": "Plan Professional ~USD 45/usuario/mes (ref. 20 usuarios)"
+    },
+    "power_bi": {
+      "nombre": "Microsoft Power BI Pro",
+      "categoria": "bi_analytics",
+      "keywords": ["kpi", "dashboard", "tablero", "concentracion", "estadistica", "comercial", "bi"],
+      "usd_anual": 2400,
+      "pricing_ref": "Power BI Pro ~USD 10/usuario/mes (ref. 20 usuarios)"
+    },
+    "hubspot": {
+      "nombre": "HubSpot Marketing Hub",
+      "categoria": "bi_analytics",
+      "keywords": ["comercial", "marketing", "crm", "estadistica"],
+      "usd_anual": 9600,
+      "pricing_ref": "Professional ~USD 800/mes"
+    },
+    "snipe_it": {
+      "nombre": "Asset Panda",
+      "categoria": "activos",
+      "keywords": ["uniforme", "activo", "stock uniforme", "asset"],
+      "usd_anual": 1500,
+      "pricing_ref": "Gestión de activos/equipamiento ~USD 125/mes ref."
+    },
+    "workday_hcm": {
+      "nombre": "Workday HCM (Payroll)",
+      "categoria": "rrhh_payroll",
+      "keywords": ["recibo", "nomina", "payroll", "liquidacion"],
+      "usd_anual": 15000,
+      "pricing_ref": "Módulo payroll mid-market (anual estimado)"
+    },
+    "coupa": {
+      "nombre": "Coupa Procurement",
+      "categoria": "compras",
+      "keywords": ["compra", "procurement", "aprobacion compra"],
+      "usd_anual": 25000,
+      "pricing_ref": "Procurement cloud enterprise (anual estimado)"
+    },
+    "auditboard": {
+      "nombre": "AuditBoard",
+      "categoria": "auditoria",
+      "keywords": ["auditoria", "audit", "compliance", "control interno"],
+      "usd_anual": 12000,
+      "pricing_ref": "GRC/auditoría cloud (anual ref. mid-market)"
+    },
+    "uipath": {
+      "nombre": "UiPath Automation Cloud",
+      "categoria": "rpa",
+      "keywords": ["nc", "nota de credito", "rpa", "robot", "automation"],
+      "usd_anual": 5040,
+      "pricing_ref": "Plan Pro ~USD 420/mes"
+    }
+  },
+  "caso_overrides": {
+    "7": "power_automate",
+    "2": "sap_gts",
+    "3": "importgenius",
+    "6": "zoho_inventory",
+    "8": "cin7",
+    "5": "route4me",
+    "9": "scandit",
+    "17": "factorial",
+    "18": "jira_sm",
+    "16": "relex",
+    "19": "sap_concur",
+    "24": "crayon",
+    "1": "retail_pro",
+    "10": "netsuite_costing",
+    "23": "project44",
+    "20": "bamboohr",
+    "26": "docuware",
+    "27": "fiix",
+    "21": "power_bi",
+    "22": "hubspot",
+    "25": "snipe_it",
+    "14": "workday_hcm",
+    "4": "coupa",
+    "11": "power_bi",
+    "12": "auditboard",
+    "13": "uipath"
+  }
+}

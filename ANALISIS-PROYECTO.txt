@@ -1,0 +1,115 @@
+# TABLERO DE KPIs TOP — Análisis consolidado
+# Fuente: pizarra + audios transcritos (18/06/2026)
+
+================================================================================
+1. OBJETIVO DEL TABLERO
+================================================================================
+
+Medir el valor de cada desarrollo/caso del grupo TOP en tres dimensiones:
+
+  A) INVERSIÓN (lo que nosotros ponemos)
+     - Horas × USD 50/hora (tarifa interna senior)
+     - Fases: Discovery, Diseño, Desarrollo, Implementación, Fee, Mantenimiento, Nube
+     - El "conocimiento" (Discovery) es ganancia intangible pero se puede numerar
+
+  B) AHORRO / GANANCIA para el usuario/área beneficiada
+     - Horas de tiempo liberado por mes → anualizado (ej: 60 h/mes × 12 = 720 h/año)
+     - Valor en dinero: suelo bruto analista senior × cotización dólar del momento
+     - Ganancia = plata ahorrada + horas ahorradas
+
+  C) COSTO EVITADO (desarrollo externo / mercado)
+     - ¿Cuánto costaría comprar una app o contratar desarrollo externo?
+     - Puede ser aplicación comercial, desarrollo a medida, o ambos
+     - Comparar contra nuestra inversión interna
+
+================================================================================
+2. ESTRUCTURA DE DATOS POR CASO (inferida de pizarra + audios)
+================================================================================
+
+Por cada caso/proyecto TOP:
+
+  IDENTIFICACIÓN
+  - Nombre del caso
+  - Estado: Realizado | En desarrollo | Por comenzar
+  - Área / usuario beneficiado
+
+  INVERSIÓN INTERNA (USD 50/h)
+  - Discovery (horas) — incluye valor de "conocimiento lógico"
+  - Diseño (horas)
+  - Desarrollo (horas)
+  - Implementación
+  - Fee
+  - Mantenimiento (mensual o único)
+  - Nube (ej: USD 1000/mes, a veces incluido en implementación)
+
+  AHORRO PARA EL USUARIO
+  - Horas liberadas por mes
+  - Horas liberadas por año (calculado)
+  - Sueldo referencia analista (suelo bruto comercio)
+  - Cotización dólar (fecha del cálculo)
+  - Ahorro mensual USD (calculado)
+  - Ahorro anual USD (calculado)
+
+  MERCADO / EXTERNO
+  - Costo app comercial (si aplica)
+  - Costo desarrollo externo (si aplica)
+  - Costo evitado total
+
+  RESULTADO
+  - Ganancia horas totales
+  - Ganancia económica total
+  - Ganancia por conocimiento (Discovery)
+  - ROI / balance neto
+
+================================================================================
+3. FUENTES DE DATOS
+================================================================================
+
+  PRIMARIA: Google Sheet (casos, horas, estados, datos base)
+  SECUNDARIAS (cálculos automáticos):
+  - Cotización dólar (API BCRA / dolarapi / manual en sheet)
+  - Índice suelo analista senior (tabla de referencia o sheet de parámetros)
+  - Precios de mercado (manual por caso o catálogo)
+
+================================================================================
+4. TRANSCRIPCIONES ORIGINALES
+================================================================================
+
+--- Audio 1 ---
+Bueno, lo que tenemos que hacer es un KPI de lo que nosotros invertimos en cada
+desarrollo, lo que ahorramos de tiempo y dinero, lo que ganamos de tiempo y
+dinero en la persona o usuario que le estamos haciendo la solución. ¿Cuánto nos
+saldría un desarrollo externo que evitamos con esta solución? Dividiré en dos:
+lo que nos saldría con una aplicación o nos saldría un desarrollo, lo que
+encontremos o ambos en el mercado.
+
+--- Audio 2 ---
+Ahora, la lógica de la inversión son 50 dólares por hora y cuánto nos llevó en
+tiempo. Tenemos que sacar horas por tiempo también. Al principio voy a dejarlo
+con horas y listo. 50 dólares la hora — única vez o también mantenimiento.
+
+La lógica del ahorro: índice de suelo de analista senior empleado de comercio
+(suelo bruto) con cotización del dólar de ese momento. Tomar las horas que se
+ahorra la persona o lo que invertía al mes, tener ese dato y anualizarlo.
+
+Ganancia: plata que se ahorra la empresa + horas que se ahorran.
+
+Para desarrollo interno: Discovery, desarrollo de la aplicación, implementación
+y Fee. Si es aplicación: implementación, Fee, mantenimiento, gastos de nube
+(generalmente en el valor de implementación).
+
+Muy importante: la inversión necesita un número para la lógica de conocimiento.
+El conocimiento es invaluable, no está en desarrollo externo — sería el
+Discovery. Podemos ponerle número a la inversión del Discovery. Eso también es
+ganancia al final: ganancia de conocimiento.
+
+================================================================================
+5. EJEMPLO NUMÉRICO (pizarra)
+================================================================================
+
+  Inversión referencia: 10 h × USD 50 = USD 500
+  Tiempo liberado: 60 h/mes × 12 = 720 h/año
+  Valor hora usuario: USD 20 → 720 × 20 = USD 14.400/año
+  Discovery: 30 h | Diseño: 10 h
+  Nube: USD 1.000/mes
+  Ganancia anual referencia: USD 14.400 + conocimiento
