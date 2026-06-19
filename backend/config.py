@@ -28,5 +28,8 @@ DISCOVERY_EXTERNO_FACTOR = float(os.getenv("DISCOVERY_EXTERNO_FACTOR", "1.5"))
 # Brecha de adaptación cuando se elige app comercial (integración + lógica)
 BRECHA_APP_PCT = float(os.getenv("BRECHA_APP_PCT", "0.35"))
 
+COTIZACION_AUTO = os.getenv("COTIZACION_AUTO", "true").lower() in ("1", "true", "yes", "si")
+COTIZACION_TIPO = os.getenv("COTIZACION_TIPO", "blue")
+
 HOST = os.getenv("HOST", "127.0.0.1")
 PORT = int(os.getenv("PORT", "8765"))

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { CasosRevisarView, filtrarCasosRevisar } from './components/CasosRevisar'
 import { ComparativosView } from './components/Comparativos'
 import { KpiCharts, StatCard } from './components/Dashboard'
+import { PizarraHero } from './components/PizarraHero'
 import { fmtUsd } from './components/ChartTooltip'
 import { CasosTable, PipelineBoard } from './components/Pipeline'
 import type { DashboardData, TabId } from './types'
@@ -137,25 +138,27 @@ export default function App() {
 
       {tab === 'dashboard' && (
         <>
-          <section className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <StatCard label="Casos totales" value={String(data.resumen.total_casos)} accent="bg-blue-500" />
-            <StatCard
-              label="Inversión TOP"
-              value={fmtUsd(data.resumen.inversion_total_usd)}
-              sub={`${data.resumen.horas_invertidas_total} hs × USD ${data.parametros.tarifa_inversion_usd_h}/h`}
-              accent="bg-indigo-500"
-            />
-            <StatCard
-              label="Ahorro anual"
-              value={fmtUsd(data.resumen.ahorro_anual_total_usd)}
-              sub={`${data.resumen.horas_ahorradas_anual_total} hs liberadas/año`}
-              accent="bg-emerald-500"
-            />
+          <PizarraHero data={data} />
+
+          <section className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <StatCard label="Casos" value={String(data.resumen.total_casos)} accent="bg-slate-500" />
             <StatCard
               label="ROI neto"
               value={fmtUsd(data.resumen.roi_total_usd)}
-              sub={`Dólar ref: $${data.parametros.cotizacion_dolar}`}
+              sub={`${data.resumen.casos_roi_negativo} casos a revisar`}
               accent="bg-purple-500"
+            />
+            <StatCard
+              label="Pro TOP"
+              value={String(data.resumen.comparativo_total.casos_pro_top_discovery)}
+              sub="Veredicto comparativos"
+              accent="bg-emerald-500"
+            />
+            <StatCard
+              label="Discovery acum."
+              value={`${data.resumen.pizarra.conocimiento_horas}h`}
+              sub={fmtUsd(data.resumen.pizarra.conocimiento_usd)}
+              accent="bg-cyan-500"
             />
           </section>
 

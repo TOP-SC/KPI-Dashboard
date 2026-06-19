@@ -47,14 +47,22 @@ export function PipelineBoard({ casos }: { casos: Caso[] }) {
                     </span>
                   </div>
                   <p className="mt-1 text-xs text-slate-400">{c.usuario || c.origen || '—'}</p>
-                  <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
+                  <div className="mt-2 grid grid-cols-3 gap-1 text-[10px]">
                     <div>
-                      <span className="text-slate-500">Inv.</span>
+                      <span className="text-slate-500">Invertimos</span>
                       <p className="font-semibold text-blue-300">{fmtUsd(c.kpi.inversion_usd)}</p>
                     </div>
                     <div>
-                      <span className="text-slate-500">Ahorro/año</span>
+                      <span className="text-slate-500">Liberamos</span>
                       <p className="font-semibold text-emerald-300">{fmtUsd(c.kpi.ahorro_anual_usd)}</p>
+                    </div>
+                    <div>
+                      <span className="text-slate-500">Evitamos</span>
+                      <p className="font-semibold text-amber-300">
+                        {c.comparativo.ahorro_vs_app_real != null
+                          ? fmtUsd(c.comparativo.ahorro_vs_app_real)
+                          : '—'}
+                      </p>
                     </div>
                   </div>
                 </article>

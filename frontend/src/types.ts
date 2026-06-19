@@ -16,6 +16,7 @@ export interface ComparativoCaso {
   complejidad: 'baja' | 'media' | 'alta'
   discovery_razon: string
   discovery_horas_top: number
+  discovery_desde_sheet: boolean
   discovery_horas_externo_estimado: number
   discovery_usd_top: number
   discovery_usd_freelancer: number
@@ -64,6 +65,19 @@ export interface Caso {
   valor_mercado?: string
   estado: 'realizado' | 'en_desarrollo' | 'por_comenzar'
   alerta_roi?: string | null
+  fases_inversion?: {
+    horas_por_fase: {
+      discovery: number | null
+      diseno: number | null
+      desarrollo: number | null
+      implementacion: number | null
+      mantenimiento: number | null
+    }
+    fee_usd: number | null
+    nube_usd_mes: number | null
+    total_usd_fases: number | null
+    desde_sheet: boolean
+  }
   kpi: KpiCaso
   comparativo: ComparativoCaso
 }
@@ -75,6 +89,14 @@ export interface DashboardData {
     tarifa_inversion_usd_h: number
     tarifa_ahorro_ars_h: number
     cotizacion_dolar: number
+    cotizacion_meta?: {
+      fuente?: string
+      tipo?: string
+      auto?: boolean
+      venta?: number
+      actualizado?: string
+      error_api?: string
+    }
     tarifa_freelancer_usd_h: number
     tarifa_empresa_usd_h: number
     horizonte_app_anios: number
@@ -92,6 +114,18 @@ export interface DashboardData {
     horas_ahorradas_anual_total: number
     casos_roi_negativo: number
     por_estado: Record<string, number>
+    pizarra: {
+      invertimos_usd: number
+      invertimos_horas_dev: number
+      conocimiento_usd: number
+      conocimiento_horas: number
+      liberamos_usd_anual: number
+      liberamos_horas_anual: number
+      evitamos_usd: number
+      evitamos_vs_freelancer: number
+      evitamos_vs_empresa: number
+      evitamos_vs_app: number
+    }
     comparativo_total: {
       ahorro_vs_freelancer_usd: number
       ahorro_vs_empresa_usd: number

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentación técnica · Tablero KPIs TOP</title>
+  <link rel="stylesheet" href="css/docs.css" />
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top">
+      <div class="brand">Grupo TOP · Técnica</div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="avances.html">Avances</a>
+        <a href="tecnica.html" class="active">Técnica</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>Documentación <span>técnica</span></h1>
+      <p class="lead">
+        Arquitectura, stack, APIs, fórmulas de negocio y guía de operación del Tablero KPIs TOP.
+      </p>
+    </header>
+
+    <h2 class="section-title">Arquitectura</h2>
+    <div class="card">
+      <pre>┌─────────────────────────────────────────────────────────┐
+│  FRONTEND · React 18 + Vite + TypeScript + Tailwind     │
+│  Recharts · 3 pestañas (Dashboard / Comparativos /       │
+│  Casos a revisar)                                       │
+└──────────────────────────┬──────────────────────────────┘
+                           │ GET /api/dashboard?refresh=1
+┌──────────────────────────▼──────────────────────────────┐
+│  BACKEND · Python FastAPI (puerto 8765 por defecto)     │
+│  services/sheets.py  → carga datos                      │
+│  services/parser.py  → normaliza filas sheet            │
+│  services/kpi.py     → KPIs, discovery, comparativos, pizarra │
+│  services/mercado_apps.py → catálogo SaaS                     │
+│  services/cotizacion.py   → dolarapi (blue) + fallback .env   │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+        ┌──────────────────┼──────────────────┐
+        ▼                  ▼                  ▼
+  Google Sheet      data/casos.json    data/catalogo_mercado.json
+  (export CSV)      (caché local)      (apps reales + precios)</pre>
+    </div>
+
+    <h2 class="section-title">Stack tecnológico</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Frontend</h3>
+        <table>
+          <tr><th>Componente</th><th>Tecnología</th></tr>
+          <tr><td>Framework</td><td>React 18 + Vite</td></tr>
+          <tr><td>Lenguaje</td><td>TypeScript</td></tr>
+          <tr><td>Estilos</td><td>Tailwind CSS</td></tr>
+          <tr><td>Gráficos</td><td>Recharts</td></tr>
+          <tr><td>Build</td><td><code>npm run build</code> → <code>frontend/dist</code></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Backend</h3>
+        <table>
+          <tr><th>Componente</th><th>Tecnología</th></tr>
+          <tr><td>API</td><td>FastAPI + Uvicorn</td></tr>
+          <tr><td>HTTP cliente</td><td>httpx (export sheet)</td></tr>
+          <tr><td>Sheets privada</td><td>gspread + service account (opcional)</td></tr>
+          <tr><td>Config</td><td>python-dotenv (.env)</td></tr>
+          <tr><td>Static</td><td>Sirve <code>frontend/dist</code> en producción local</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h2 class="section-title">Estructura del proyecto</h2>
+    <div class="card">
+      <pre>Tablero de KPIs TOP/
+├── iniciar.bat              # Arranque one-click (Windows)
+├── launcher.py              # Compila front si falta + levanta server
+├── .env / .env.example      # Parámetros (NO commitear .env)
+├── ver-documentacion.bat    # Abre docs/index.html
+├── docs/                    # Documentación HTML (avances + técnica)
+│   ├── index.html · avances.html · tecnica.html
+│   └── css/docs.css
+├── backend/
+│   ├── main.py              # FastAPI + rutas
+│   ├── config.py            # Variables de entorno
+│   └── services/
+│       ├── sheets.py        # Orquestación de fuentes
+│       ├── parser.py        # Parseo CSV/sheet por headers
+│       ├── kpi.py           # KPIs, discovery, comparativos, pizarra
+│       ├── cotizacion.py    # Dólar dolarapi + fallback
+│       └── mercado_apps.py  # Match app mercado real
+├── frontend/src/
+│   ├── components/PizarraHero.tsx  # 3 bloques pizarra
+│   ├── components/Comparativos.tsx
+│   └── ...
+├── data/
+│   ├── casos.json           # Caché última sync sheet
+│   └── catalogo_mercado.json# Apps SaaS + precios ref.
+├── scripts/actualizar_datos.py
+└── docs/                    # Esta documentación HTML</pre>
+    </div>
+
+    <h2 class="section-title">API REST</h2>
+    <div class="card">
+      <table>
+        <tr><th>Método</th><th>Ruta</th><th>Descripción</th></tr>
+        <tr><td>GET</td><td><code>/api/health</code></td><td>Health check</td></tr>
+        <tr><td>GET</td><td><code>/api/dashboard</code></td><td>JSON completo: parámetros, resumen, casos enriquecidos</td></tr>
+        <tr><td>GET</td><td><code>/api/dashboard?refresh=1</code></td><td>Fuerza lectura Google Sheet; actualiza caché</td></tr>
+        <tr><td>GET</td><td><code>/</code></td><td>SPA React (build en dist/)</td></tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">Modelo pizarra (UI + resumen API)</h2>
+    <div class="card">
+      <p style="color:var(--muted);margin-bottom:1rem;font-size:0.9rem">
+        El dashboard principal muestra tres bloques alineados al pizarrón inicial.
+        Los totales vienen en <code>resumen.pizarra</code> del JSON de la API.
+      </p>
+      <table>
+        <tr><th>Bloque UI</th><th>Campo API</th><th>Significado</th></tr>
+        <tr><td>1 · Invertimos</td><td><code>invertimos_usd</code></td><td>Σ inversión TOP (hs × 50)</td></tr>
+        <tr><td></td><td><code>conocimiento_usd</code></td><td>Σ discovery × 50 (valor conocimiento interno)</td></tr>
+        <tr><td>2 · Liberamos</td><td><code>liberamos_usd_anual</code></td><td>Σ ahorro anual USD del usuario</td></tr>
+        <tr><td></td><td><code>liberamos_horas_anual</code></td><td>Σ hs/mes × 12</td></tr>
+        <tr><td>3 · Evitamos pagar afuera</td><td><code>evitamos_usd</code></td><td>Máximo ahorro vs freelancer, empresa o app</td></tr>
+        <tr><td></td><td><code>evitamos_vs_*</code></td><td>Desglose por alternativa externa</td></tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">Valor conocimiento interno</h2>
+    <div class="card">
+      <p style="color:var(--muted);margin-bottom:0.75rem;font-size:0.9rem">
+        KPI de Comparativos: <strong>Discovery TOP acumulado</strong>. Monetiza el conocimiento
+        lógico del negocio que TOP incorpora y un externo no trae incluido.
+      </p>
+      <pre>Por caso:   valor_conocimiento = discovery_horas × TARIFA_INVERSION (50 USD/h)
+Portfolio:  valor_conocimiento_interno_usd = Σ discovery_horas_top × 50
+
+Horas discovery:
+  1. Columna sheet "Discovery (hs)" si existe
+  2. Si no → estimación por complejidad (score del contexto del caso)</pre>
+    </div>
+
+    <h2 class="section-title">Fuentes de datos</h2>
+    <div class="card">
+      <table>
+        <tr><th>Prioridad</th><th>Fuente</th><th>Cuándo</th></tr>
+        <tr><td>1</td><td>Google Sheets (service account)</td><td>Si existe <code>credentials.json</code></td></tr>
+        <tr><td>2</td><td>Google Sheets (export CSV público)</td><td>Sheet compartida lectura</td></tr>
+        <tr><td>3</td><td><code>data/casos.json</code></td><td>Fallback / sin red</td></tr>
+      </table>
+      <p style="margin-top:1rem;color:var(--muted);font-size:0.875rem">
+        <strong>Sheet ID:</strong> <code>1xjKnaJBcKVPBQAY-DLJQQeFP9oW3A2o5TDszKSJm4_o</code> ·
+        <strong>GID:</strong> <code>1156348848</code>
+      </p>
+      <h3 style="margin-top:1.25rem;font-size:0.75rem;text-transform:uppercase;color:var(--muted)">Columnas opcionales (parser listo)</h3>
+      <table style="margin-top:0.5rem">
+        <tr><th>Columna sugerida</th><th>Uso</th></tr>
+        <tr><td>Discovery (hs)</td><td>Horas discovery reales → reemplaza estimación</td></tr>
+        <tr><td>Diseño (hs) · Desarrollo (hs) · Implementación (hs)</td><td>Desglose fases inversión</td></tr>
+        <tr><td>Fee (USD) · Nube (USD/mes) · Mantenimiento (hs)</td><td>Costos directos / recurrentes</td></tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">Fórmulas KPI (por caso)</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Inversión TOP</h3>
+        <pre>inversion_usd = horas_invertidas × TARIFA_INVERSION_USD_H
+(default: USD 50/h)</pre>
+        <h3 style="margin-top:1rem">Ahorro anual</h3>
+        <pre>horas_ahorradas_anual = reduccion_hs_mes × 12
+ahorro_anual_ars = horas_ahorradas_anual × TARIFA_AHORRO_ARS_H
+ahorro_anual_usd = ahorro_anual_ars / cotizacion_dolar
+(cotización: dolarapi blue si COTIZACION_AUTO=true)</pre>
+        <h3 style="margin-top:1rem">ROI</h3>
+        <pre>roi_usd = ahorro_anual_usd − inversion_usd</pre>
+      </div>
+      <div class="card">
+        <h3>Comparativo Freelancer</h3>
+        <pre>discovery_externo = discovery_top × 1.5
+freelancer_total = (hs_dev × USD 75/h) + discovery_externo</pre>
+        <h3 style="margin-top:1rem">Comparativo Empresa</h3>
+        <pre>empresa_total = (hs_dev × USD 100/h) + discovery_externo</pre>
+        <h3 style="margin-top:1rem">App mercado real</h3>
+        <pre>licencia_horizonte = usd_anual_catálogo × 3 años
+brecha = discovery_freelancer × (1 + 35%) × factor_conocimiento
+app_costo_real = licencia_horizonte + brecha</pre>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem">
+          App y precio desde <code>data/catalogo_mercado.json</code>, no columnas Drive.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Discovery</h2>
+    <div class="card">
+      <p style="margin-bottom:0.75rem;color:var(--muted);font-size:0.9rem">
+        Prioridad: columna sheet <code>Discovery (hs)</code>. Si está vacía, estimación algorítmica
+        leyendo reporte, herramienta, origen, obs, en_arg.
+      </p>
+      <table>
+        <tr><th>Complejidad</th><th>Horas base</th><th>Señales</th></tr>
+        <tr><td>Baja</td><td>~10 h</td><td>Alertas, Apps Script simple</td></tr>
+        <tr><td>Media</td><td>~25 h</td><td>Integraciones, stack custom moderado</td></tr>
+        <tr><td>Alta</td><td>~40 h</td><td>ERP, Comex, multi-área, muchas hs dev</td></tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">Variables de entorno (.env)</h2>
+    <div class="card">
+      <table>
+        <tr><th>Variable</th><th>Default</th><th>Uso</th></tr>
+        <tr><td><code>SHEET_ID</code> / <code>SHEET_GID</code></td><td>—</td><td>Google Sheet origen</td></tr>
+        <tr><td><code>TARIFA_INVERSION_USD_H</code></td><td>50</td><td>Costo hora TOP</td></tr>
+        <tr><td><code>TARIFA_AHORRO_ARS_H</code></td><td>12000</td><td>Valor hora usuario</td></tr>
+        <tr><td><code>COTIZACION_DOLAR</code></td><td>1470</td><td>Fallback manual ARS/USD</td></tr>
+        <tr><td><code>COTIZACION_AUTO</code></td><td>true</td><td>Usar dolarapi.com al cargar</td></tr>
+        <tr><td><code>COTIZACION_TIPO</code></td><td>blue</td><td>oficial · blue · bolsa · etc.</td></tr>
+        <tr><td><code>TARIFA_FREELANCER_USD_H</code></td><td>75</td><td>Comparativo externo</td></tr>
+        <tr><td><code>TARIFA_EMPRESA_USD_H</code></td><td>100</td><td>Agencia dev</td></tr>
+        <tr><td><code>HORIZONTE_APP_ANIOS</code></td><td>3</td><td>Licencia app acumulada</td></tr>
+        <tr><td><code>DISCOVERY_HS_BAJA/MEDIA/ALTA</code></td><td>10/25/40</td><td>Discovery por complejidad</td></tr>
+        <tr><td><code>DISCOVERY_EXTERNO_FACTOR</code></td><td>1.5</td><td>Multiplicador externo</td></tr>
+        <tr><td><code>BRECHA_APP_PCT</code></td><td>0.35</td><td>Brecha adaptación app</td></tr>
+        <tr><td><code>PORT</code></td><td>8765</td><td>Puerto servidor</td></tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">Instalación y arranque</h2>
+    <div class="card">
+      <h3>Requisitos</h3>
+      <ul class="checklist">
+        <li><span class="icon ok">✓</span><span>Python 3.11+ · Node.js 18+</span></li>
+        <li><span class="icon ok">✓</span><span>Windows (iniciar.bat) — adaptable a Linux/Mac</span></li>
+      </ul>
+      <h3 style="margin-top:1rem">Arranque rápido</h3>
+      <pre>1. Copiar .env.example → .env y ajustar parámetros
+2. Doble click en iniciar.bat
+   → crea venv, instala deps, compila front, abre browser
+3. URL típica: http://127.0.0.1:8765</pre>
+      <h3 style="margin-top:1rem">Documentación</h3>
+      <pre>Doble click ver-documentacion.bat  →  docs/index.html</pre>
+      <pre>cd backend && python -m venv venv && venv\Scripts\pip install -r requirements.txt
+cd ../frontend && npm install && npm run build
+cd ../backend && venv\Scripts\python main.py</pre>
+    </div>
+
+    <h2 class="section-title">Catálogo mercado SaaS</h2>
+    <div class="card">
+      <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">
+        Archivo <code>data/catalogo_mercado.json</code>: apps reales, precios orientativos USD/año,
+        keywords y overrides por <code>listado</code> de caso. Editable sin tocar código.
+      </p>
+      <pre>{
+  "apps": { "power_automate": { "nombre": "...", "usd_anual": 900, ... } },
+  "caso_overrides": { "7": "power_automate", "2": "sap_gts", ... }
+}</pre>
+    </div>
+
+    <h2 class="section-title">Repositorio</h2>
+    <div class="card">
+      <p><strong>GitHub:</strong> <a href="https://github.com/TOP-SC/KPI-Dashboard" style="color:#60a5fa">github.com/TOP-SC/KPI-Dashboard</a></p>
+      <p style="margin-top:0.5rem;color:var(--muted);font-size:0.875rem">
+        No commitear: <code>.env</code>, <code>credentials.json</code>, <code>venv/</code>, <code>node_modules/</code>
+      </p>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="avances.html">Ver reporte de avances</a>
+      <a class="btn btn-ghost" href="index.html">← Volver al inicio</a>
+    </div>
+
+    <footer>Documentación técnica · Tablero KPIs TOP · 19 Jun 2026</footer>
+  </div>
+</body>
+</html>

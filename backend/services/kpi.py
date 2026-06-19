@@ -303,7 +303,15 @@ def _calcular_comparativo(
     app_alternativas = alt.get("alternativas", []) if alt else []
     fuente_app = alt.get("fuente", "Sin alternativa de mercado identificada") if alt else "Sin alternativa de mercado identificada"
     horas_ext = horas if horas > 0 else 0
-    complejidad, hs_discovery_top, discovery_razon = _analizar_discovery(caso, horas, discovery_cfg)
+    complejidad, hs_discovery_est, discovery_razon = _analizar_discovery(caso, horas, discovery_cfg)
+
+    hs_discovery_sheet = _parse_num(caso.get("discovery_horas"))
+    if hs_discovery_sheet is not None and hs_discovery_sheet > 0:
+        hs_discovery_top = hs_discovery_sheet
+        fuente_discovery_top = "Sheet: Discovery (hs) real"
+    else:
+        hs_discovery_top = hs_discovery_est
+        fuente_discovery_top = f"Estimado por complejidad ({complejidad}): incluye lógica interna"
 
     hs_discovery_ext = round(hs_discovery_top * discovery_externo_factor, 1)
     hs_conocimiento = horas_ext + hs_discovery_top
@@ -354,6 +362,7 @@ def _calcular_comparativo(
         "complejidad": complejidad,
         "discovery_razon": discovery_razon,
         "discovery_horas_top": hs_discovery_top,
+        "discovery_desde_sheet": hs_discovery_sheet is not None and hs_discovery_sheet > 0,
         "discovery_horas_externo_estimado": hs_discovery_ext,
         "discovery_usd_top": discovery_usd_top,
         "discovery_usd_freelancer": discovery_usd_freelancer,
@@ -381,7 +390,7 @@ def _calcular_comparativo(
         "veredicto": veredicto,
         "veredicto_texto": veredicto_texto,
         "fuente_app": fuente_app,
-        "fuente_discovery_top": f"Estimado por complejidad ({complejidad}): incluye lógica interna",
+        "fuente_discovery_top": fuente_discovery_top,
         "fuente_discovery_externo": f"Discovery × {discovery_externo_factor} (externo no conoce el negocio)",
         "fuente_freelancer": f"(Hs dev + discovery externo) × tarifas mercado",
         "fuente_empresa": f"(Hs dev + discovery externo) × tarifa agencia",
@@ -441,10 +450,19 @@ def enriquecer_caso(
         brecha_app_pct,
     )
 
+    fases_raw = caso.get("fases") or {}
+    fases_inversion = _calcular_fases_inversion(
+        hs_discovery=comparativo["discovery_horas_top"],
+        fases_raw=fases_raw,
+        tarifa_inv=tarifa_inv,
+        horas_dev=horas,
+    )
+
     return {
         **caso,
         "estado": estado,
         "alerta_roi": alerta,
+        "fases_inversion": fases_inversion,
         "kpi": {
             "horas_invertidas": horas,
             "inversion_usd": round(inversion_usd, 2),
@@ -462,6 +480,44 @@ def enriquecer_caso(
     }
 
 
+def _calcular_fases_inversion(
+    hs_discovery: float,
+    fases_raw: dict[str, Any],
+    tarifa_inv: float,
+    horas_dev: float,
+) -> dict[str, Any]:
+    diseno = _parse_num(fases_raw.get("diseno_hs"))
+    dev_fase = _parse_num(fases_raw.get("desarrollo_hs"))
+    impl = _parse_num(fases_raw.get("implementacion_hs"))
+    mant = _parse_num(fases_raw.get("mantenimiento_hs"))
+    fee = _parse_num(fases_raw.get("fee_usd"))
+    nube = _parse_num(fases_raw.get("nube_usd_mes"))
+
+    hs_por_fase = {
+        "discovery": hs_discovery if hs_discovery > 0 else None,
+        "diseno": diseno,
+        "desarrollo": dev_fase if dev_fase is not None else (horas_dev if horas_dev > 0 else None),
+        "implementacion": impl,
+        "mantenimiento": mant,
+    }
+    usd_horas = sum(
+        (h or 0) * tarifa_inv for h in hs_por_fase.values() if h is not None
+    )
+    usd_directo = (fee or 0) + (nube or 0) * 12
+    tiene_sheet = any(
+        v is not None and v > 0
+        for v in [diseno, dev_fase, impl, mant, fee, nube]
+    )
+
+    return {
+        "horas_por_fase": hs_por_fase,
+        "fee_usd": fee,
+        "nube_usd_mes": nube,
+        "total_usd_fases": round(usd_horas + usd_directo, 2) if (tiene_sheet or hs_discovery > 0) else None,
+        "desde_sheet": tiene_sheet,
+    }
+
+
 def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
     total_inv = sum(c["kpi"]["inversion_usd"] for c in casos)
     total_ahorro_usd = sum(c["kpi"]["ahorro_anual_usd"] for c in casos)
@@ -473,6 +529,7 @@ def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
     ahorro_vs_empresa = 0.0
     ahorro_vs_app_real = 0.0
     valor_conocimiento_total = 0.0
+    discovery_horas_total = 0.0
     pro_top = 0
 
     for c in casos:
@@ -487,8 +544,11 @@ def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
         if comp.get("ahorro_vs_app_real") is not None:
             ahorro_vs_app_real += comp["ahorro_vs_app_real"]
         valor_conocimiento_total += comp.get("valor_conocimiento_interno_usd", 0)
+        discovery_horas_total += comp.get("discovery_horas_top", 0)
         if comp.get("veredicto") == "pro_top":
             pro_top += 1
+
+    evitamos_usd = max(ahorro_vs_freelancer, ahorro_vs_empresa, ahorro_vs_app_real)
 
     return {
         "total_casos": len(casos),
@@ -499,6 +559,18 @@ def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
         "horas_ahorradas_anual_total": total_horas_ahorro,
         "casos_roi_negativo": negativos,
         "por_estado": por_estado,
+        "pizarra": {
+            "invertimos_usd": round(total_inv, 2),
+            "invertimos_horas_dev": total_horas_inv,
+            "conocimiento_usd": round(valor_conocimiento_total, 2),
+            "conocimiento_horas": round(discovery_horas_total, 1),
+            "liberamos_usd_anual": round(total_ahorro_usd, 2),
+            "liberamos_horas_anual": total_horas_ahorro,
+            "evitamos_usd": round(evitamos_usd, 2),
+            "evitamos_vs_freelancer": round(ahorro_vs_freelancer, 2),
+            "evitamos_vs_empresa": round(ahorro_vs_empresa, 2),
+            "evitamos_vs_app": round(ahorro_vs_app_real, 2),
+        },
         "comparativo_total": {
             "ahorro_vs_freelancer_usd": round(ahorro_vs_freelancer, 2),
             "ahorro_vs_empresa_usd": round(ahorro_vs_empresa, 2),

@@ -131,6 +131,13 @@ def _column_map_from_header(header: list[str]) -> dict[str, int | None]:
         "valor_mercado": find("valor aprox", "valor"),
         "en_arg": find("en arg"),
         "obs": find("obs"),
+        "discovery_horas": find("discovery"),
+        "hs_diseno": find("diseño (hs", "diseno (hs", "diseño hs"),
+        "hs_desarrollo_fase": find("desarrollo (hs", "dev (hs"),
+        "hs_implementacion": find("implementación (hs", "implementacion (hs"),
+        "fee_usd": find("fee (usd", "fee usd", "fee"),
+        "nube_usd_mes": find("nube (usd", "nube usd", "nube"),
+        "hs_mantenimiento": find("mantenimiento (hs", "mantenimiento hs"),
     }
 
 
@@ -183,6 +190,15 @@ def normalize_row_mapped(row: list[str], col: dict[str, int | None]) -> dict[str
         "valor_mercado": _cell(row, col["valor_mercado"]),
         "en_arg": _cell(row, col["en_arg"]),
         "obs": _cell(row, col["obs"]),
+        "discovery_horas": _parse_num(_cell(row, col["discovery_horas"])),
+        "fases": {
+            "diseno_hs": _parse_num(_cell(row, col["hs_diseno"])),
+            "desarrollo_hs": _parse_num(_cell(row, col["hs_desarrollo_fase"])),
+            "implementacion_hs": _parse_num(_cell(row, col["hs_implementacion"])),
+            "mantenimiento_hs": _parse_num(_cell(row, col["hs_mantenimiento"])),
+            "fee_usd": _parse_num(_cell(row, col["fee_usd"])),
+            "nube_usd_mes": _parse_num(_cell(row, col["nube_usd_mes"])),
+        },
     }
     return caso if es_caso_valido(caso) else {}
 

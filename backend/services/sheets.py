@@ -24,6 +24,7 @@ from config import (
     TARIFA_FREELANCER_USD_H,
     TARIFA_INVERSION_USD_H,
 )
+from services.cotizacion import obtener_cotizacion
 from services.kpi import calcular_resumen, enriquecer_caso
 from services.parser import es_caso_valido, normalize_row, parse_sheet_rows
 
@@ -125,13 +126,14 @@ def _intentar_fetch_sheet() -> tuple[list[dict[str, Any]], str, str | None]:
     return [], "", " · ".join(errores) if errores else "No se pudo leer Google Sheets."
 
 
-def _enriquecer_todos(raw: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _enriquecer_todos(raw: list[dict[str, Any]], cotizacion: float | None = None) -> list[dict[str, Any]]:
+    cot = cotizacion if cotizacion is not None else COTIZACION_DOLAR
     return [
         enriquecer_caso(
             caso,
             TARIFA_INVERSION_USD_H,
             TARIFA_AHORRO_ARS_H,
-            COTIZACION_DOLAR,
+            cot,
             TARIFA_FREELANCER_USD_H,
             TARIFA_EMPRESA_USD_H,
             HORIZONTE_APP_ANIOS,
@@ -143,7 +145,7 @@ def _enriquecer_todos(raw: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ]
 
 
-def cargar_casos(force_refresh: bool = False) -> tuple[list[dict[str, Any]], str, list[str]]:
+def cargar_casos(force_refresh: bool = False, cotizacion: float | None = None) -> tuple[list[dict[str, Any]], str, list[str]]:
     avisos: list[str] = []
 
     sheet_raw, fuente_sheet, error_sheet = _intentar_fetch_sheet()
@@ -151,7 +153,7 @@ def cargar_casos(force_refresh: bool = False) -> tuple[list[dict[str, Any]], str
         sheet_raw = [c for c in sheet_raw if es_caso_valido(c)]
         if sheet_raw:
             _save_cache(sheet_raw)
-            return _enriquecer_todos(sheet_raw), fuente_sheet, avisos
+            return _enriquecer_todos(sheet_raw, cotizacion), fuente_sheet, avisos
 
     if force_refresh and error_sheet:
         avisos.append(error_sheet)
@@ -162,7 +164,7 @@ def cargar_casos(force_refresh: bool = False) -> tuple[list[dict[str, Any]], str
         if raw:
             if force_refresh:
                 avisos.append("Mostrando caché local porque no se pudo leer la sheet en vivo.")
-            return _enriquecer_todos(raw), "local_cache", avisos
+            return _enriquecer_todos(raw, cotizacion), "local_cache", avisos
 
     export_md = Path(__file__).resolve().parent.parent.parent / "uploads" / "edit-0.md"
     alt_export = (
@@ -180,20 +182,23 @@ def cargar_casos(force_refresh: bool = False) -> tuple[list[dict[str, Any]], str
             if raw:
                 if force_refresh:
                     avisos.append("Mostrando exportación local (sheet no disponible).")
-                return _enriquecer_todos(raw), "export_local", avisos
+                return _enriquecer_todos(raw, cotizacion), "export_local", avisos
 
     return [], "local_cache", avisos + (["Sin datos disponibles."] if not avisos else [])
 
 
 def obtener_dashboard(force_refresh: bool = False) -> dict[str, Any]:
-    casos, fuente, avisos = cargar_casos(force_refresh=force_refresh)
+    cotizacion, cotizacion_meta = obtener_cotizacion()
+    casos, fuente, avisos = cargar_casos(force_refresh=force_refresh, cotizacion=cotizacion)
+
     return {
         "fuente": fuente,
         "avisos": avisos,
         "parametros": {
             "tarifa_inversion_usd_h": TARIFA_INVERSION_USD_H,
             "tarifa_ahorro_ars_h": TARIFA_AHORRO_ARS_H,
-            "cotizacion_dolar": COTIZACION_DOLAR,
+            "cotizacion_dolar": cotizacion,
+            "cotizacion_meta": cotizacion_meta,
             "tarifa_freelancer_usd_h": TARIFA_FREELANCER_USD_H,
             "tarifa_empresa_usd_h": TARIFA_EMPRESA_USD_H,
             "horizonte_app_anios": HORIZONTE_APP_ANIOS,

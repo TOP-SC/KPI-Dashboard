@@ -1,5 +1,6 @@
 # TABLERO DE KPIs TOP — Análisis consolidado
 # Fuente: pizarra + audios transcritos (18/06/2026)
+# Última actualización implementación: 19/06/2026
 
 ================================================================================
 1. OBJETIVO DEL TABLERO
@@ -7,101 +8,74 @@
 
 Medir el valor de cada desarrollo/caso del grupo TOP en tres dimensiones:
 
-  A) INVERSIÓN (lo que nosotros ponemos)
+  A) INVERSIÓN (lo que nosotros ponemos) — bloque UI: INVERTIMOS
      - Horas × USD 50/hora (tarifa interna senior)
      - Fases: Discovery, Diseño, Desarrollo, Implementación, Fee, Mantenimiento, Nube
      - El "conocimiento" (Discovery) es ganancia intangible pero se puede numerar
 
-  B) AHORRO / GANANCIA para el usuario/área beneficiada
+  B) AHORRO / GANANCIA para el usuario/área beneficiada — bloque UI: LIBERAMOS
      - Horas de tiempo liberado por mes → anualizado (ej: 60 h/mes × 12 = 720 h/año)
      - Valor en dinero: suelo bruto analista senior × cotización dólar del momento
      - Ganancia = plata ahorrada + horas ahorradas
 
-  C) COSTO EVITADO (desarrollo externo / mercado)
+  C) COSTO EVITADO (desarrollo externo / mercado) — bloque UI: EVITAMOS PAGAR AFUERA
      - ¿Cuánto costaría comprar una app o contratar desarrollo externo?
-     - Puede ser aplicación comercial, desarrollo a medida, o ambos
-     - Comparar contra nuestra inversión interna
+     - Comparar contra nuestra inversión interna (freelancer, empresa, app mercado)
 
 ================================================================================
-2. ESTRUCTURA DE DATOS POR CASO (inferida de pizarra + audios)
+2. FÓRMULAS IMPLEMENTADAS (backend/services/kpi.py)
 ================================================================================
 
-Por cada caso/proyecto TOP:
+INVERSIÓN TOP
+  inversion_usd = horas_invertidas × 50  (o columna sheet "50 usd/hora")
 
-  IDENTIFICACIÓN
-  - Nombre del caso
-  - Estado: Realizado | En desarrollo | Por comenzar
-  - Área / usuario beneficiado
+AHORRO / LIBERAMOS
+  horas_ahorradas_anual = reduccion_hs_mes × 12
+  ahorro_anual_ars = horas_ahorradas_anual × 12.000
+  ahorro_anual_usd = ahorro_anual_ars / cotizacion_dolar
+  roi_usd = ahorro_anual_usd − inversion_usd
 
-  INVERSIÓN INTERNA (USD 50/h)
-  - Discovery (horas) — incluye valor de "conocimiento lógico"
-  - Diseño (horas)
-  - Desarrollo (horas)
-  - Implementación
-  - Fee
-  - Mantenimiento (mensual o único)
-  - Nube (ej: USD 1000/mes, a veces incluido en implementación)
+COTIZACIÓN DÓLAR
+  Por defecto: dolarapi.com (tipo blue), fallback .env COTIZACION_DOLAR
 
-  AHORRO PARA EL USUARIO
-  - Horas liberadas por mes
-  - Horas liberadas por año (calculado)
-  - Sueldo referencia analista (suelo bruto comercio)
-  - Cotización dólar (fecha del cálculo)
-  - Ahorro mensual USD (calculado)
-  - Ahorro anual USD (calculado)
+VALOR CONOCIMIENTO INTERNO (Comparativos — "Discovery TOP acumulado")
+  Por caso:  discovery_horas × 50 USD/h
+  Total:     Σ discovery_horas de todos los casos
+  Horas discovery:
+    - Si sheet tiene columna "Discovery (hs)" → valor real
+    - Si no → estimado por complejidad (baja ~10h, media ~25h, alta ~40h)
+      según contexto del caso (ERP, Comex, stack custom, alertas simples, etc.)
 
-  MERCADO / EXTERNO
-  - Costo app comercial (si aplica)
-  - Costo desarrollo externo (si aplica)
-  - Costo evitado total
-
-  RESULTADO
-  - Ganancia horas totales
-  - Ganancia económica total
-  - Ganancia por conocimiento (Discovery)
-  - ROI / balance neto
+COMPARATIVOS EXTERNOS
+  Freelancer = (hs_dev × 75) + (discovery × 1.5 × 75)
+  Empresa    = (hs_dev × 100) + (discovery × 1.5 × 100)
+  App real   = licencia catálogo SaaS × 3 años + brecha adaptación
+  Apps desde data/catalogo_mercado.json (NO columnas manuales del Drive)
 
 ================================================================================
-3. FUENTES DE DATOS
+3. GOOGLE SHEET — COLUMNAS ACTUALES Y OPCIONALES
 ================================================================================
 
-  PRIMARIA: Google Sheet (casos, horas, estados, datos base)
-  SECUNDARIAS (cálculos automáticos):
-  - Cotización dólar (API BCRA / dolarapi / manual en sheet)
-  - Índice suelo analista senior (tabla de referencia o sheet de parámetros)
-  - Precios de mercado (manual por caso o catálogo)
+ACTUALES (parser automático por encabezado):
+  Listado, Reporte/Proceso, Origen, Usuario, Herramienta, Fechas, Estado,
+  Horas Invertidas, 50 usd/hora, Reduccion Hs/mes, 12000 x hora, En ARG, OBS
+
+OPCIONALES (el tablero las usa cuando existen):
+  Discovery (hs)
+  Diseño (hs), Desarrollo (hs), Implementación (hs), Mantenimiento (hs)
+  Fee (USD), Nube (USD/mes)
+
+Sheet ID: 1xjKnaJBcKVPBQAY-DLJQQeFP9oW3A2o5TDszKSJm4_o  GID: 1156348848
 
 ================================================================================
-4. TRANSCRIPCIONES ORIGINALES
+4. ARQUITECTURA
 ================================================================================
 
---- Audio 1 ---
-Bueno, lo que tenemos que hacer es un KPI de lo que nosotros invertimos en cada
-desarrollo, lo que ahorramos de tiempo y dinero, lo que ganamos de tiempo y
-dinero en la persona o usuario que le estamos haciendo la solución. ¿Cuánto nos
-saldría un desarrollo externo que evitamos con esta solución? Dividiré en dos:
-lo que nos saldría con una aplicación o nos saldría un desarrollo, lo que
-encontremos o ambos en el mercado.
-
---- Audio 2 ---
-Ahora, la lógica de la inversión son 50 dólares por hora y cuánto nos llevó en
-tiempo. Tenemos que sacar horas por tiempo también. Al principio voy a dejarlo
-con horas y listo. 50 dólares la hora — única vez o también mantenimiento.
-
-La lógica del ahorro: índice de suelo de analista senior empleado de comercio
-(suelo bruto) con cotización del dólar de ese momento. Tomar las horas que se
-ahorra la persona o lo que invertía al mes, tener ese dato y anualizarlo.
-
-Ganancia: plata que se ahorra la empresa + horas que se ahorran.
-
-Para desarrollo interno: Discovery, desarrollo de la aplicación, implementación
-y Fee. Si es aplicación: implementación, Fee, mantenimiento, gastos de nube
-(generalmente en el valor de implementación).
-
-Muy importante: la inversión necesita un número para la lógica de conocimiento.
-El conocimiento es invaluable, no está en desarrollo externo — sería el
-Discovery. Podemos ponerle número a la inversión del Discovery. Eso también es
-ganancia al final: ganancia de conocimiento.
+  React + Vite + Tailwind + Recharts  ←→  FastAPI (Python)
+  Fuentes: Google Sheet (vivo) → caché data/casos.json
+  Catálogo apps: data/catalogo_mercado.json
+  Arranque: iniciar.bat · Docs: ver-documentacion.bat → docs/
+  Repo: https://github.com/TOP-SC/KPI-Dashboard
 
 ================================================================================
 5. EJEMPLO NUMÉRICO (pizarra)
@@ -113,3 +87,23 @@ ganancia al final: ganancia de conocimiento.
   Discovery: 30 h | Diseño: 10 h
   Nube: USD 1.000/mes
   Ganancia anual referencia: USD 14.400 + conocimiento
+
+================================================================================
+6. ESTADO DEL PROYECTO (19/06/2026)
+================================================================================
+
+HECHO:
+  - Dashboard modelo pizarra (3 bloques: Invertimos · Liberamos · Evitamos)
+  - Pestañas Dashboard, Comparativos, Casos a revisar
+  - Sheet en vivo + botón Actualizar + parser por headers
+  - Catálogo mercado SaaS (27 apps)
+  - Discovery estimado + soporte columna sheet
+  - Dólar automático dolarapi
+  - Documentación HTML en docs/
+  - Popup detalle comparativos por caso
+
+PENDIENTE:
+  - Cargar Discovery (hs) real en sheet por cada caso
+  - Desglose fases inversión en sheet
+  - Deploy interno / acceso equipo
+  - Export PDF ejecutivo

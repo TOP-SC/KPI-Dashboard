@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avances del desarrollo · Tablero KPIs TOP</title>
+  <link rel="stylesheet" href="css/docs.css" />
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top">
+      <div class="brand">Grupo TOP · Avances</div>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="avances.html" class="active">Avances</a>
+        <a href="tecnica.html">Técnica</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>Reporte de <span>avances</span></h1>
+      <p class="lead">
+        Desde los insumos entregados al inicio del proyecto hasta el tablero operativo actual.
+        Punto de partida → lo incorporado → próximos pasos.
+      </p>
+      <div class="meta-row">
+        <span class="pill"><strong>Inicio</strong> 18 Jun 2026</span>
+        <span class="pill"><strong>Fase</strong> MVP + comparativos</span>
+        <span class="pill"><strong>Progreso global</strong> 85%</span>
+      </div>
+    </header>
+
+    <div class="card ring-wrap">
+      <div class="ring" style="--p:85"><span>85%</span></div>
+      <div>
+        <h2 style="font-size:1.1rem;color:white;text-transform:none;letter-spacing:0;margin-bottom:0.5rem">
+          Avance general del MVP
+        </h2>
+        <p style="color:var(--muted);font-size:0.95rem;max-width:36rem">
+          Tablero operativo con modelo pizarra en UI (Invertimos · Liberamos · Evitamos),
+          comparativos vs mercado SaaS, sheet en vivo, dólar automático y documentación HTML.
+          Pendiente: cargar Discovery (hs) real en la planilla y deploy interno.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Progreso por área</h2>
+    <p class="section-sub">Porcentaje estimado de completitud funcional</p>
+
+    <div class="card">
+      <div class="progress-block">
+        <div class="progress-head"><span>Incorporación de insumos iniciales</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Integración Google Sheet + parser</span><span>92%</span></div>
+        <div class="bar"><i style="width:92%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Dashboard KPIs + modelo pizarra (3 bloques)</span><span>90%</span></div>
+        <div class="bar"><i style="width:90%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Comparativos + catálogo mercado SaaS</span><span>90%</span></div>
+        <div class="bar"><i style="width:90%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Valor conocimiento / discovery</span><span>85%</span></div>
+        <div class="bar"><i style="width:85%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Dólar automático (dolarapi)</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Documentación HTML ejecutiva</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Discovery (hs) real en sheet</span><span>30%</span></div>
+        <div class="bar"><i style="width:30%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Despliegue / acceso equipo ampliado</span><span>25%</span></div>
+        <div class="bar"><i style="width:25%"></i></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Punto de partida — datos entregados</h2>
+    <p class="section-sub">Insumos recibidos al kickoff del proyecto (base de todo lo construido)</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Entregable</h3>
+        <ul class="checklist">
+          <li><span class="icon ok">✓</span><span><strong>Foto pizarra</strong> — modelo de negocio: inversión USD 50/h, tiempo liberado, ganancia anual, discovery, externo vs interno</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Audio 1</strong> — KPI inversión, ahorro, costo evitado (app + desarrollo externo)</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Audio 2</strong> — tarifas, sueldo analista × dólar, fases (discovery, dev, fee, nube)</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Transcripciones TXT</strong> — material de referencia permanente</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Google Sheet</strong> — 26+ casos TOP con horas, estados, áreas, mercado</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Análisis consolidado</strong> — documento de reglas de negocio</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Reglas de negocio acordadas</h3>
+        <ul class="checklist">
+          <li><span class="icon ok">✓</span><span><strong>Inversión TOP</strong> = horas × USD 50/h (senior interno)</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Ahorro usuario</strong> = hs/mes × 12 × ARS 12.000/h ÷ cotización dólar</span></li>
+          <li><span class="icon ok">✓</span><span><strong>ROI</strong> = ahorro anual USD − inversión TOP</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Discovery</strong> = ventaja intangible numerable; externo paga más (×1.5 hs)</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Comparativa app</strong> = licencia mercado + brecha adaptación lógica interna</span></li>
+          <li><span class="icon ok">✓</span><span><strong>Estados</strong> = Realizado · En desarrollo · Por comenzar</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">Línea de tiempo</h2>
+    <p class="section-sub">Hitos del desarrollo hasta hoy</p>
+
+    <div class="card">
+      <div class="timeline">
+        <div class="t-item done">
+          <h4>Kickoff y análisis</h4>
+          <p>Pizarra + audios transcritos → definición React + FastAPI + Google Sheets. Decisión: tablero gráfico ejecutivo, no Streamlit.</p>
+        </div>
+        <div class="t-item done">
+          <h4>MVP Dashboard</h4>
+          <p>KPIs globales, gráficos Recharts, pipeline kanban por estado, tabla detalle, arranque <code>iniciar.bat</code> one-click.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Integración Sheet en vivo</h4>
+          <p>Parser por encabezados (Prioridad, Estado), botón Actualizar, caché local de respaldo, filtro filas vacías.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Pestaña Comparativos</h4>
+          <p>TOP vs Freelancer vs Empresa vs App real (3 años). Discovery estimado por contexto del caso. Tabla compacta + popup detalle.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Catálogo mercado SaaS</h4>
+          <p>27 apps reales con pricing orientativo — comparativa independiente de columnas manuales del Drive.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Repositorio GitHub</h4>
+          <p>Código en <a href="https://github.com/TOP-SC/KPI-Dashboard" style="color:#60a5fa">TOP-SC/KPI-Dashboard</a>, rama main.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Modelo pizarra en UI</h4>
+          <p>Dashboard con 3 bloques: Invertimos · Liberamos · Evitamos pagar afuera. Pipeline con las 3 métricas por caso.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Dólar automático</h4>
+          <p>Cotización en vivo vía <a href="https://dolarapi.com" style="color:#60a5fa">dolarapi.com</a> (blue por defecto), fallback a .env.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Documentación HTML</h4>
+          <p>docs/index · avances · tecnica + ver-documentacion.bat. Análisis actualizado en ANALISIS-PROYECTO.txt.</p>
+        </div>
+        <div class="t-item next">
+          <h4>Discovery (hs) en sheet</h4>
+          <p>Columna real por caso — reemplaza estimación algorítmica. Parser listo.</p>
+        </div>
+        <div class="t-item next">
+          <h4>Fases inversión en sheet</h4>
+          <p>Diseño, Dev, Implementación, Fee, Nube — columnas opcionales ya soportadas.</p>
+        </div>
+        <div class="t-item next">
+          <h4>Deploy interno</h4>
+          <p>Servidor compartido o cloud para todo el equipo TOP.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Lo incorporado al producto</h2>
+    <p class="section-sub">Funcionalidades ya disponibles en el tablero</p>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Dashboard</h3>
+        <ul class="checklist">
+          <li><span class="icon ok">✓</span><span>Modelo pizarra: Invertimos · Liberamos · Evitamos</span></li>
+          <li><span class="icon ok">✓</span><span>Gráficos barras + torta</span></li>
+          <li><span class="icon ok">✓</span><span>Pipeline kanban (3 métricas/caso)</span></li>
+          <li><span class="icon ok">✓</span><span>Tabla detalle + filtros estado</span></li>
+          <li><span class="icon ok">✓</span><span>Dólar blue en vivo (dolarapi)</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Comparativos</h3>
+        <ul class="checklist">
+          <li><span class="icon ok">✓</span><span>Freelancer + discovery externo</span></li>
+          <li><span class="icon ok">✓</span><span>Empresa dev + discovery</span></li>
+          <li><span class="icon ok">✓</span><span>App mercado (catálogo SaaS)</span></li>
+          <li><span class="icon ok">✓</span><span>Valor conocimiento = Σ discovery × 50</span></li>
+          <li><span class="icon ok">✓</span><span>Tabla compacta + popup detalle</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Operación</h3>
+        <ul class="checklist">
+          <li><span class="icon ok">✓</span><span>Actualizar desde Sheet</span></li>
+          <li><span class="icon ok">✓</span><span>Casos a revisar (ROI−)</span></li>
+          <li><span class="icon ok">✓</span><span>Tooltips legibles</span></li>
+          <li><span class="icon ok">✓</span><span>Parámetros vía .env</span></li>
+          <li><span class="icon ok">✓</span><span>Dark theme ejecutivo</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">Backlog — próximas iteraciones</h2>
+    <p class="section-sub">Pendiente para cerrar la visión completa de la pizarra</p>
+
+    <div class="card">
+      <ul class="checklist">
+        <li><span class="icon pending">→</span><span><strong>Discovery (hs) en sheet</strong> — columna real por caso (parser listo)</span></li>
+        <li><span class="icon pending">→</span><span><strong>Fases inversión en sheet</strong> — Diseño, Dev, Fee, Nube (parser listo)</span></li>
+        <li><span class="icon pending">→</span><span><strong>Refinar catálogo mercado</strong> — precios por tier AR</span></li>
+        <li><span class="icon todo">○</span><span><strong>Deploy interno</strong> — servidor compartido para todo TOP</span></li>
+        <li><span class="icon todo">○</span><span><strong>Export PDF</strong> — reporte ejecutivo one-click</span></li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">Valor entregado hoy</h2>
+    <div class="grid grid-4">
+      <div class="card accent-blue"><h2>Casos</h2><div class="value">26</div><div class="sub">Con KPI calculado</div></div>
+      <div class="card accent-emerald"><h2>ROI visible</h2><div class="value">✓</div><div class="sub">Por caso y total</div></div>
+      <div class="card accent-purple"><h2>Comparativa</h2><div class="value">4</div><div class="sub">TOP · Freelancer · Empresa · App</div></div>
+      <div class="card accent-amber"><h2>Arranque</h2><div class="value">1 click</div><div class="sub">iniciar.bat</div></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="tecnica.html">Ver documentación técnica</a>
+      <a class="btn btn-ghost" href="index.html">← Volver al inicio</a>
+    </div>
+
+    <footer>Última actualización: 19 Jun 2026 · Tablero KPIs TOP</footer>
+  </div>
+</body>
+</html>

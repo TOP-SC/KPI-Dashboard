@@ -20,7 +20,16 @@
     "mercado_similar": "Microsoft Power Automate / Slack Alerts (alertas operativas)",
     "valor_mercado": "USD 450/año",
     "en_arg": "En sucursales AR lo más extendido es Google Workspace (Gmail/Chat/Sheets) + Apps Script para alertas; WhatsApp Business API y BotMaker para avisos operativos a responsables de local; donde hay licencia Microsoft, Power Automate + Teams; n8n/Make crecen para integraciones low-code; Slack poco frecuente fuera de equipos tech.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 2,
@@ -43,7 +52,16 @@
     "mercado_similar": "SAP Global Trade Services (GTS) / Descartes CustomsInfo",
     "valor_mercado": "USD 550/año",
     "en_arg": "Comex en AR se resuelve sobre todo con Tango/SAP B1 + planillas y desarrollos a medida (Apps Script, consultores); integración con webservices AFIP/MARIA vía despachantes; DespachAR y SIGEA en estudios aduaneros; SAP GTS solo en multinacionales; Gemini/ChatGPT para lectura de documentación aduanera es tendencia reciente en directorios.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 3,
@@ -66,7 +84,16 @@
     "mercado_similar": "ImportGenius / Panjiva (inteligencia de importaciones)",
     "valor_mercado": "USD 600/año",
     "en_arg": "Inteligencia importaciones: Nosis, Veraz y Equifax para datos de empresas; INDEC/DATOS.GOB.AR para series públicas; ImportGenius poco adoptado en PyME; lo habitual es Excel/Power BI + relevamiento manual + IA (Gemini) como en este proyecto; consultoras Comex arman tableros propios sobre fuentes públicas y ERP.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 6,
@@ -89,7 +116,16 @@
     "mercado_similar": "Zoho Inventory / Odoo Inventario / Sortly",
     "valor_mercado": "USD 350/año",
     "en_arg": "Inventario de insumos en retail AR: módulo stock Tango + Google Sheets/Excel (muy frecuente); Odoo Community autohospedado en PyMEs; Contabilium/Colppy en empresas chicas; Apps Script para formularios de carga desde sucursal; hardware escáner en depósito suele ser Zebra con planilla intermedia.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 8,
@@ -112,7 +148,16 @@
     "mercado_similar": "Cin7 / Netstock / Power BI + ERP (inventario valorizado)",
     "valor_mercado": "USD 750/año",
     "en_arg": "Inventario valorizado: combo más habitual en retail AR = Power Query + Excel o Power BI conectado a SQL de Tango; Looker Studio para tableros livianos sin licencia; Tableau presente en corporaciones pero Power BI domina donde hay contrato Microsoft; exportaciones CSV desde Tango siguen siendo base de casi todos los reportes.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 5,
@@ -135,7 +180,16 @@
     "mercado_similar": "Route4Me / Onfleet / Google Maps Platform (rutas)",
     "valor_mercado": "USD 450/año",
     "en_arg": "Rutas en AR: planificación manual Google Maps/Waze + Sheets; SimpliRoute y Envíame usados en distribución LATAM; operadores Andreani, OCA, Urbano y Enviopack con portales B2B; Route4Me/Onfleet en empresas medianas de logística; SAP TM raro fuera de grandes cadenas.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 9,
@@ -158,7 +212,16 @@
     "mercado_similar": "Scandit SDK / Zebra Scanner / Sortly (escaneo SKU)",
     "valor_mercado": "USD 400/año",
     "en_arg": "Escaneo SKU en depósitos AR: lectores Zebra/Honeywell (estándar hardware) + app Tango móvil o desarrollo PWA; alternativa económica = cámara del celular con web app; MercadoLibre y sellers usan app propia; Scandit SDK solo en proyectos con presupuesto de desarrollo; integración final casi siempre vuelve al ERP (Tango/Núcleo).",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 17,
@@ -181,7 +244,16 @@
     "mercado_similar": "Factorial HR / Google Forms + AppSheet (control comedor)",
     "valor_mercado": "USD 250/año",
     "en_arg": "Control comedor RRHH AR: Google Forms + Sheets sigue siendo la solución #1 por costo cero; Buk, Rex+, Rankmi, Quippos y Humand ganan terreno en fichada/beneficios; empresas grandes usan módulo RRHH Tango o Bejerman; Excel por email persiste en estructuras más tradicionales.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 18,
@@ -204,7 +276,16 @@
     "mercado_similar": "Jira Service Management / Freshservice + IA (mesa de solicitudes)",
     "valor_mercado": "USD 450/año",
     "en_arg": "Mesas de solicitudes internas: Google Apps Script + Sheets muy común en equipos de transformación; Jira/Notion en áreas tech; Freshdesk en pymes de servicios; ServiceNow solo bancos/telcos; integración ChatGPT/Gemini vía API es tendencia fuerte 2025-26 en corporaciones argentinas para triage y respuestas.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 16,
@@ -227,7 +308,16 @@
     "mercado_similar": "RELEX Solutions / Blue Yonder (abastecimiento retail)",
     "valor_mercado": "USD 400/año",
     "en_arg": "Abastecimiento retail AR: casi siempre Tango distribución + Excel/VBA o Power Query (como este proyecto); Núcleo y Softech en cadenas retail medianas; SAP Retail/RELEX solo grandes players; replenishment suele ser semi-automático con reglas en planilla antes de pasar a ERP; integradores Axoft/Tango muy activos en customizaciones.",
-    "obs": "2"
+    "obs": "2",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 19,
@@ -250,7 +340,16 @@
     "mercado_similar": "SAP Concur / Expensify + FormAssembly (rendicion de gastos)",
     "valor_mercado": "USD 1.900/año",
     "en_arg": "Rendición de gastos AR: FormAssembly + Tango Suscripciones (stack implementado acá); alternativas = Google Forms + aprobación por mail, Bejerman tesorería, Xubio/Colppy en PyME; SAP Concur/Expensify casi exclusivo de multinacionales; alertas por mail automatizadas con IT son patrón frecuente en tesorería.",
-    "obs": "2da Etapa: Mail automatico de TCC por resposición y por inhabilitación de la cuenta. Implementado. 16/03/2026. Se unificò el panel de rendiciòn de gastos en sucursales con la solicitud de habilitaciòn de cuenta de tesoreria de repo FF (actualmente se encuentra funcional 100%) ademàs se logrò automatizar con la ayuda de IT un mail de alerta ante apertura de cuenta de tesoreria cc al BO, que avisa cada 1 hora que se encuentra abierta la misma a fin de acelerar el proceso de repo y dar aviso al BO paraasegurar el correcto cierre de la cuenta de repo."
+    "obs": "2da Etapa: Mail automatico de TCC por resposición y por inhabilitación de la cuenta. Implementado. 16/03/2026. Se unificò el panel de rendiciòn de gastos en sucursales con la solicitud de habilitaciòn de cuenta de tesoreria de repo FF (actualmente se encuentra funcional 100%) ademàs se logrò automatizar con la ayuda de IT un mail de alerta ante apertura de cuenta de tesoreria cc al BO, que avisa cada 1 hora que se encuentra abierta la misma a fin de acelerar el proceso de repo y dar aviso al BO paraasegurar el correcto cierre de la cuenta de repo.",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 24,
@@ -273,7 +372,16 @@
     "mercado_similar": "Crayon / Klue / Kompyte (mapping competitivo)",
     "valor_mercado": "USD 800/año",
     "en_arg": "Pricing competitivo AR: relevamiento manual en puntos de venta + Excel; MercadoLibre como referencia de precios online; Google Trends Argentina; PrisApp y herramientas de monitoreo de góndola en retail; Nielsen/IRI en grandes cadenas; IA (Gemini) para consolidar fotos/listas de precios es adopción emergente en comercial.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 1,
@@ -296,7 +404,16 @@
     "mercado_similar": "Retail Pro / Lightspeed / integraciones POS-ERP custom",
     "valor_mercado": "USD 800/año",
     "en_arg": "Operativa ventas MR: Tango facturación/POS + consultas SQL + Python/Streamlit (enfoque de este portal); integradores Tango locales para APIs; Excel con macros todavía en sucursales legacy; Retail Pro/Lightspeed en algunos rubros muebles/hogar; Google Sheets como capa operativa encima del ERP es patrón muy argentino.",
-    "obs": "10.04: Probar como conectar al server. Juan, Giselle. \nMinuta 11.11: Solución Propuesta: Se acordó reemplazar el Excel. Braian (Sistemas) desarrollará un endpoint (API) que entregue los datos de la consulta de Tango (facturas del día con \"lista de artículos de segunda\") directamente en formato JSON o texto plano."
+    "obs": "10.04: Probar como conectar al server. Juan, Giselle. \nMinuta 11.11: Solución Propuesta: Se acordó reemplazar el Excel. Braian (Sistemas) desarrollará un endpoint (API) que entregue los datos de la consulta de Tango (facturas del día con \"lista de artículos de segunda\") directamente en formato JSON o texto plano.",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 10,
@@ -319,7 +436,16 @@
     "mercado_similar": "SAP Product Costing / NetSuite Costing / Kinaxis",
     "valor_mercado": "USD 800/año",
     "en_arg": "Costeo por SKU AR: módulo industrial/costos Tango o Bejerman en empresas formales; Excel con matrices de costo en finanzas PyME; Colppy/Xubio nivel básico; SAP CO/NetSuite solo corporativo; proyectos de costeo fino suelen frenarse por complejidad de datos maestros (caso actual).",
-    "obs": "10.04.26 Se descarta proyecto por inversion prolongada de tiempo. \nSe generó reunión 20-02"
+    "obs": "10.04.26 Se descarta proyecto por inversion prolongada de tiempo. \nSe generó reunión 20-02",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 23,
@@ -342,7 +468,16 @@
     "mercado_similar": "ShipStation / project44 / FourKites (gestion de fletes). Freight audit SaaS: VeriShip, FreightPOP. TMS cloud (CargoWise lite, TMS AR generico). Low-code: Retool + Airtable. Fletes/logistica AR: portales Andreani, OCA, Enviopack y tarifarios en Excel; SimpliRoute para flotas medianas; coordinacion operativa por WhatsApp con transportistas; WMS Tango o SAP en CD; orquestadores custom sobre APIs de carriers. Ninguno cubre remitos RAR, conjuntos colchon+somier, maestro WAMARO ni reglas Mantello.",
     "valor_mercado": "Horas equipo (estim. central): 269 h (rango 190-348 h). Inversion ref. USD 50/h = USD 13,450. Valor reposicion mercado mismo alcance: ~640 h senior = USD 22.400-35.200 (USD 35-55/h). Activo actual: USD 0 licencia/ano; mantenimiento ~0,3 FTE.",
     "en_arg": "269 h x ARS 12.000/h = ARS 3,228,000. Reposicion mercado (640 h, TC 1.150): ARS 25.760.000 - 40.480.000. Ahorro labor vs Excel manual: ~ARS 10.800.000/ano (0,9 FTE analista). Mantenimiento interno estimado: ~ARS 1.800.000/ano.",
-    "obs": "17.04.26: Relevamiento Fletes/Envios Log. Acordado retomar tarifario con ABM localidades. Replanteo Graciela Da Silva | SommierCenter. Sem 02-07/05 Fase 1: cimentacion datos - auditoria, limpieza y migracion tarifario a repositorio digital; estandarizacion ABM localidades. 06/02/2026: creacion repo; trabajo inicial de a poco (no full time). Proyecto Mantello previo dejo de avanzar; Fletes definido como proyecto definitivo. Desde 28/05/2026: full time 8 h/dia (4 dias habiles hasta 02/06/2026 = 32 h certificadas). Horas totales estimadas: 269 h central (237 h fase parcial estim. + 32 h full time). Entregado: 10.493 LOC Python, 37 servicios, 53 endpoints, 12.881 renglones Tango, 1.775 tarifas, 29 sucursales, motor reglas. En proceso: Mundo 2 fletes CABA/GBA, prefacturas Clickpack/Gama-Blast, validacion rutas criticas. 640 h = referencia mercado reposicion, no horas reales del equipo."
+    "obs": "17.04.26: Relevamiento Fletes/Envios Log. Acordado retomar tarifario con ABM localidades. Replanteo Graciela Da Silva | SommierCenter. Sem 02-07/05 Fase 1: cimentacion datos - auditoria, limpieza y migracion tarifario a repositorio digital; estandarizacion ABM localidades. 06/02/2026: creacion repo; trabajo inicial de a poco (no full time). Proyecto Mantello previo dejo de avanzar; Fletes definido como proyecto definitivo. Desde 28/05/2026: full time 8 h/dia (4 dias habiles hasta 02/06/2026 = 32 h certificadas). Horas totales estimadas: 269 h central (237 h fase parcial estim. + 32 h full time). Entregado: 10.493 LOC Python, 37 servicios, 53 endpoints, 12.881 renglones Tango, 1.775 tarifas, 29 sucursales, motor reglas. En proceso: Mundo 2 fletes CABA/GBA, prefacturas Clickpack/Gama-Blast, validacion rutas criticas. 640 h = referencia mercado reposicion, no horas reales del equipo.",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 20,
@@ -365,7 +500,16 @@
     "mercado_similar": "Factorial / BambooHR Time / Rex+ (control de presentismo)",
     "valor_mercado": "USD 900/año",
     "en_arg": "Presentismo AR: Rex+ y Bejerman muy instalados en liquidación; Buk, Humand, Quippos y Rankmi en fichada digital; relojes biométricos ZKTeco + software local en plantas; Excel de fichadas manual persiste; Tango RRHH para empresas que unifican nómina + asistencia; integración reloj→ERP suele ser el cuello de botella.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 26,
@@ -388,7 +532,16 @@
     "mercado_similar": "DocuWare / M-Files / ABBYY FlexiCapture (mesa de entrada)",
     "valor_mercado": "USD 600/año",
     "en_arg": "Mesa de entrada compras AR: carpeta Google Drive + Forms/FormAssembly + Apps Script (modelo del proyecto); DocuSign/Signatura para firmas; email con PDF adjunto sigue siendo canal principal; M-Files/DocuWare en industrias reguladas; SAP workflow solo en corporaciones; Claude/Cursor acelerando desarrollo de validaciones custom.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 27,
@@ -411,7 +564,16 @@
     "mercado_similar": "Fiix CMMS / UpKeep / IBM Maximo (mantenimiento)",
     "valor_mercado": "USD 400/año",
     "en_arg": "Mantenimiento AR en PyME/retail: Google Sheets + Calendar + WhatsApp para tickets (patrón dominante); SoftGuard en edificios/seguridad; SAP PM/Fiix en plantas industriales; UpKeep/Maximo en filiales de multinacionales; órdenes de trabajo en Tango si el módulo está parametrizado; muchas empresas aún en cuaderno + Excel.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 21,
@@ -434,7 +596,16 @@
     "mercado_similar": "Power BI / Tableau / Databox (tablero comercial KPIs)",
     "valor_mercado": "USD 550/año",
     "en_arg": "KPIs comerciales AR: Power BI + Excel/Power Query es el estándar de facto; Looker Studio para dashboards sin costo de licencia; Salesforce/HubSpot en equipos comerciales B2B medianos; datos fuente casi siempre Tango ventas exportado o SQL directo; Tableau presente pero menos extendido que Microsoft en corporaciones locales.",
-    "obs": "Mail vuelto a enviar 17.04.26"
+    "obs": "Mail vuelto a enviar 17.04.26",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 22,
@@ -457,7 +628,16 @@
     "mercado_similar": "HubSpot / Salesforce Analytics / Google Looker Studio",
     "valor_mercado": "USD 450/año",
     "en_arg": "Estadísticas comerciales AR: mismos stack de BI (Power BI, Looker Studio); Google Analytics/Meta Business Suite para canal digital; MercadoLibre Métricas si hay canal ML; HubSpot CRM creciendo en pymes; automatizar reportes periódicos con Apps Script o Power Automate es lo que más piden áreas comerciales.",
-    "obs": "Mail vuelto a enviar 17.04.26"
+    "obs": "Mail vuelto a enviar 17.04.26",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 25,
@@ -480,7 +660,16 @@
     "mercado_similar": "Snipe-IT / Asset Panda / UniformMarket (stock uniformes)",
     "valor_mercado": "USD 200/año",
     "en_arg": "Stock uniformes/activos RRHH: en la práctica AR mayormente Google Sheets + Forms o módulo stock Tango; AppSheet para inventario simple; Buk/Rex+ si se integra a nómina; Snipe-IT/Asset Panda poco desplegados salvo IT; WhatsApp + planilla compartida sigue usándose en muchas empresas medianas.",
-    "obs": "Es cuestion de procesos, reunirme con Cintia"
+    "obs": "Es cuestion de procesos, reunirme con Cintia",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 14,
@@ -503,7 +692,16 @@
     "mercado_similar": "Módulo ventas a empleados ERP (SAP SD-HR / Oracle) / importación batch comprobantes / RPA carga recibos internos",
     "valor_mercado": "USD 500/año",
     "en_arg": "En retail AR la compra de empleados suele resolverse con recibo manual en Tango Ventas (venta interna/descuento en nómina) + importación de archivos o carga operador; automatización típica = Excel/planilla intermedia → importador Tango o desarrollo custom sobre API/módulo empleados; integración con liquidación vía Bejerman/Tango RRHH para el descuento en sueldo; RPA puntual donde no hay API; WhatsApp/Forms para pedido del empleado y recibo automático al confirmar.",
-    "obs": "Revisión de importación de archivos en Tango. 09/03 Se habló con Guille."
+    "obs": "Revisión de importación de archivos en Tango. 09/03 Se habló con Guille.",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 4,
@@ -526,7 +724,16 @@
     "mercado_similar": "Microsoft Power Apps Procurement / Coupa / SAP Ariba",
     "valor_mercado": "USD 1.200/año",
     "en_arg": "Compras AR: Microsoft Power Apps + Automate donde hay E3/E5 (caso App Compras); Tango compras/proveedores como back-end; Colppy/Xubio OC en PyME; SAP Ariba solo grandes grupos; aprobaciones por mail con Excel adjunto todavía muy frecuente; Gemini/Copilot para lectura de facturas PDF en piloto en varias empresas.",
-    "obs": "Pendiente, cuestiones de permisos de Microsoft"
+    "obs": "Pendiente, cuestiones de permisos de Microsoft",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 11,
@@ -549,7 +756,16 @@
     "mercado_similar": "Power BI + ERP / SAP IBP / Oracle SCM (existencias KPIs)",
     "valor_mercado": "USD 650/año",
     "en_arg": "Existencias + KPIs AR: arquitectura típica = SQL Tango → Power BI (Premium o Pro) → tablero gerencial; Looker Studio para vistas operativas; SSRS/reportes Axoft legacy; Excel pivot como herramienta paralela en finanzas; SAP IBP/Oracle casi ausente en retail muebles mediano.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 12,
@@ -572,7 +788,16 @@
     "mercado_similar": "AuditBoard / TeamMate+ / ACL Analytics (auditoria)",
     "valor_mercado": "USD 600/año",
     "en_arg": "Auditoría interna AR: Excel + muestreo manual + export Tango; CaseWare/TeamMate en estudios contables y Big4; ACL/IDEA en auditoría de datos; checklists Google Sheets en áreas de calidad; AuditBoard poco difundido fuera de filiales de grupos internacionales.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   },
   {
     "listado": 13,
@@ -595,6 +820,15 @@
     "mercado_similar": "UiPath / Automation Anywhere (RPA notas de credito)",
     "valor_mercado": "USD 350/año",
     "en_arg": "Notas de crédito AR: procesamiento manual en Tango NC es lo más común; RPA UiPath/Automation Anywhere en bancos y telcos, no en retail; Make/n8n para automatizaciones puntuales sin licencia enterprise; macros Excel/VBA legacy; batch sobre exportaciones CSV del ERP antes de importar de vuelta.",
-    "obs": ""
+    "obs": "",
+    "discovery_horas": null,
+    "fases": {
+      "diseno_hs": null,
+      "desarrollo_hs": null,
+      "implementacion_hs": null,
+      "mantenimiento_hs": null,
+      "fee_usd": null,
+      "nube_usd_mes": null
+    }
   }
 ]
