@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import type { Caso, DashboardData } from '../types'
+import type { Caso, ComparativoExterno, DashboardData } from '../types'
 import { ChartTooltip, fmtUsd } from './ChartTooltip'
 import { StatCard } from './Dashboard'
 
@@ -25,6 +25,20 @@ const veredictoLabel: Record<string, string> = {
   neutro: 'Neutro',
 }
 
+const EXTERNO_LABELS: Record<string, string> = {
+  freelancer: 'Freelancer',
+  empresa: 'Empresa dev.',
+  app: 'App mercado',
+}
+
+function fmtExterno(total: number | null | undefined) {
+  return total != null ? fmtUsd(total) : '—'
+}
+
+function getExterno(comp: Caso['comparativo'], key: 'freelancer' | 'empresa' | 'app'): ComparativoExterno | undefined {
+  return comp.contextual?.externos?.[key]
+}
+
 export function ComparativosView({ data }: { data: DashboardData }) {
   const { parametros, resumen, casos } = data
   const horizonte = parametros.horizonte_app_anios
@@ -32,13 +46,13 @@ export function ComparativosView({ data }: { data: DashboardData }) {
   const [detalle, setDetalle] = useState<Caso | null>(null)
 
   const chartData = casos
-    .filter((c) => c.kpi.inversion_usd > 0 || c.comparativo.freelancer_total_usd > 0)
+    .filter((c) => c.kpi.inversion_usd > 0 || (c.comparativo.freelancer_total_usd ?? 0) > 0)
     .map((c) => ({
       name: c.reporte.length > 16 ? `${c.reporte.slice(0, 16)}…` : c.reporte,
       fullName: c.reporte,
       top: c.kpi.inversion_usd,
-      freelancer: c.comparativo.freelancer_total_usd,
-      empresa: c.comparativo.empresa_total_usd,
+      freelancer: c.comparativo.freelancer_total_usd ?? 0,
+      empresa: c.comparativo.empresa_total_usd ?? 0,
       app: c.comparativo.app_costo_real_usd ?? c.comparativo.app_mercado_usd_horizonte ?? 0,
     }))
     .slice(0, 12)
@@ -137,6 +151,9 @@ function ComparativosTable({
               >
                 <td className="px-4 py-3">
                   <p className="font-medium text-slate-100">{c.reporte}</p>
+                  {c.comparativo.modo_label && (
+                    <p className="mt-0.5 text-xs text-slate-500">{c.comparativo.modo_label}</p>
+                  )}
                 </td>
                 <td className="px-4 py-3 capitalize text-slate-400">{c.comparativo.complejidad}</td>
                 <td className="px-4 py-3 whitespace-nowrap text-cyan-300">
@@ -146,10 +163,10 @@ function ComparativosTable({
                   {fmtUsd(c.kpi.inversion_usd)}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap text-purple-300">
-                  {fmtUsd(c.comparativo.freelancer_total_usd)}
+                  {fmtExterno(c.comparativo.freelancer_total_usd)}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap text-amber-300">
-                  {fmtUsd(c.comparativo.empresa_total_usd)}
+                  {fmtExterno(c.comparativo.empresa_total_usd)}
                 </td>
                 <td className="px-4 py-3">
                   {c.comparativo.app_costo_real_usd != null ? (
@@ -181,6 +198,44 @@ function ComparativosTable({
   )
 }
 
+function DesgloseExternoBlock({
+  label,
+  externo,
+  total,
+  color,
+}: {
+  label: string
+  externo: ComparativoExterno | undefined
+  total: number | null | undefined
+  color: string
+}) {
+  if (!externo?.aplica) {
+    return (
+      <div className="rounded-xl bg-slate-800/30 p-4 text-sm">
+        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</p>
+        <p className="mt-2 text-slate-500">No aplica a este tipo de caso</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="rounded-xl bg-slate-800/50 p-4 text-sm">
+      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</p>
+      <p className={`mt-1 font-semibold ${color}`}>{fmtExterno(total)}</p>
+      {externo.desglose.length > 0 && (
+        <ul className="mt-3 space-y-1 border-t border-slate-700/50 pt-3 text-xs text-slate-400">
+          {externo.desglose.map((d) => (
+            <li key={d.id} className="flex justify-between gap-2">
+              <span>{d.label}</span>
+              <span className="text-slate-300">{fmtUsd(d.usd)}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 function CasoDetalleModal({
   caso,
   horizonteLabel,
@@ -192,6 +247,7 @@ function CasoDetalleModal({
 }) {
   const c = caso
   const comp = c.comparativo
+  const ctx = comp.contextual
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -200,6 +256,12 @@ function CasoDetalleModal({
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
+
+  const appDesglose = getExterno(comp, 'app')?.desglose ?? []
+  const licenciaApp = appDesglose.find((d) => d.id === 'licencia')
+  const implApp = appDesglose.find((d) => d.id === 'implementacion')
+  const mantApp = appDesglose.find((d) => d.id === 'mantenimiento')
+  const brechaApp = appDesglose.find((d) => d.id === 'brecha')
 
   return (
     <div
@@ -228,6 +290,11 @@ function CasoDetalleModal({
               <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs capitalize text-slate-300">
                 {comp.complejidad}
               </span>
+              {comp.modo_label && (
+                <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs text-slate-400">
+                  {comp.modo_label}
+                </span>
+              )}
             </div>
           </div>
           <button
@@ -249,8 +316,8 @@ function CasoDetalleModal({
             </h3>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <DetalleKpi label="Inversión TOP" value={fmtUsd(c.kpi.inversion_usd)} color="text-blue-300" />
-              <DetalleKpi label="Freelancer" value={fmtUsd(comp.freelancer_total_usd)} color="text-purple-300" />
-              <DetalleKpi label="Empresa dev." value={fmtUsd(comp.empresa_total_usd)} color="text-amber-300" />
+              <DetalleKpi label="Freelancer" value={fmtExterno(comp.freelancer_total_usd)} color="text-purple-300" />
+              <DetalleKpi label="Empresa dev." value={fmtExterno(comp.empresa_total_usd)} color="text-amber-300" />
               <DetalleKpi
                 label={`App real (${horizonteLabel})`}
                 value={comp.app_costo_real_usd != null ? fmtUsd(comp.app_costo_real_usd) : '—'}
@@ -258,6 +325,40 @@ function CasoDetalleModal({
               />
             </div>
           </section>
+
+          {ctx && (
+            <section>
+              <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Desglose externo · según modalidad
+              </h3>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {(['freelancer', 'empresa', 'app'] as const).map((key) => (
+                  <DesgloseExternoBlock
+                    key={key}
+                    label={EXTERNO_LABELS[key]}
+                    externo={getExterno(comp, key)}
+                    total={
+                      key === 'freelancer'
+                        ? comp.freelancer_total_usd
+                        : key === 'empresa'
+                          ? comp.empresa_total_usd
+                          : comp.app_costo_real_usd
+                    }
+                    color={
+                      key === 'freelancer'
+                        ? 'text-purple-300'
+                        : key === 'empresa'
+                          ? 'text-amber-300'
+                          : 'text-emerald-300'
+                    }
+                  />
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-slate-500">
+                Fee, implementación, nube y mantenimiento solo se suman cuando el tipo de caso lo requiere.
+              </p>
+            </section>
+          )}
 
           <section>
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -296,15 +397,27 @@ function CasoDetalleModal({
                   </p>
                 )}
                 <p className="mt-2 text-xs text-cyan-400/80">{comp.fuente_app}</p>
-                <div className="mt-3 grid grid-cols-2 gap-3">
+                <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <DetalleKpi
                     label={`Licencia ${horizonteLabel}`}
-                    value={fmtUsd(comp.app_mercado_usd_horizonte ?? 0)}
+                    value={licenciaApp ? fmtUsd(licenciaApp.usd) : fmtUsd(comp.app_mercado_usd_horizonte ?? 0)}
                     color="text-slate-300"
                   />
+                  {implApp && (
+                    <DetalleKpi label="Implementación" value={fmtUsd(implApp.usd)} color="text-slate-300" />
+                  )}
+                  {mantApp && (
+                    <DetalleKpi label="Mantenimiento" value={fmtUsd(mantApp.usd)} color="text-slate-300" />
+                  )}
                   <DetalleKpi
                     label="Brecha adaptación"
-                    value={comp.brecha_logica_app_usd != null ? fmtUsd(comp.brecha_logica_app_usd) : '—'}
+                    value={
+                      brechaApp
+                        ? fmtUsd(brechaApp.usd)
+                        : comp.brecha_logica_app_usd != null
+                          ? fmtUsd(comp.brecha_logica_app_usd)
+                          : '—'
+                    }
                     color="text-slate-300"
                   />
                 </div>
@@ -317,10 +430,7 @@ function CasoDetalleModal({
               Ahorro vs alternativas
             </h3>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-              <AhorroItem
-                label="vs Freelancer"
-                value={comp.ahorro_vs_freelancer}
-              />
+              <AhorroItem label="vs Freelancer" value={comp.ahorro_vs_freelancer} />
               <AhorroItem label="vs Empresa" value={comp.ahorro_vs_empresa} />
               <AhorroItem label="vs App real" value={comp.ahorro_vs_app_real} />
             </div>

@@ -37,7 +37,8 @@
 │  services/sheets.py  → carga datos                      │
 │  services/parser.py  → normaliza filas sheet            │
 │  services/kpi.py     → KPIs, discovery, comparativos, pizarra │
-│  services/mercado_apps.py → catálogo SaaS                     │
+│  services/comparativa_contexto.py → modalidad + componentes   │
+│  services/mercado_apps.py → catálogo SaaS (modelos saas/ent.) │
 │  services/cotizacion.py   → dolarapi (blue) + fallback .env   │
 └──────────────────────────┬──────────────────────────────┘
                            │
@@ -90,6 +91,7 @@
 │       ├── sheets.py        # Orquestación de fuentes
 │       ├── parser.py        # Parseo CSV/sheet por headers
 │       ├── kpi.py           # KPIs, discovery, comparativos, pizarra
+│       ├── comparativa_contexto.py  # Modalidad + componentes
 │       ├── cotizacion.py    # Dólar dolarapi + fallback
 │       └── mercado_apps.py  # Match app mercado real
 ├── frontend/src/
@@ -164,6 +166,29 @@ Horas discovery:
         <tr><td>Diseño (hs) · Desarrollo (hs) · Implementación (hs)</td><td>Desglose fases inversión</td></tr>
         <tr><td>Fee (USD) · Nube (USD/mes) · Mantenimiento (hs)</td><td>Costos directos / recurrentes</td></tr>
       </table>
+    </div>
+
+    <h2 class="section-title">Comparativa contextual</h2>
+    <div class="card">
+      <p style="color:var(--muted);margin-bottom:1rem;font-size:0.9rem">
+        Motor en <code>backend/services/comparativa_contexto.py</code>. Clasifica cada caso y activa
+        solo los componentes de costo que aplican a la alternativa externa.
+      </p>
+      <table>
+        <tr><th>Modalidad</th><th>Cuándo</th><th>Componentes típicos empresa/app</th></tr>
+        <tr><td>script_ligero</td><td>Alertas, VBA, Apps Script &lt;24h</td><td>Dev + discovery (sin fee/impl)</td></tr>
+        <tr><td>desarrollo_medida</td><td>Default custom</td><td>Dev + discovery + impl + fee + nube</td></tr>
+        <tr><td>integracion_enterprise</td><td>SAP, Comex, ERP, apps enterprise</td><td>+ mantenimiento; app + impl + mant</td></tr>
+        <tr><td>saas_encaje</td><td>App SaaS encaja, baja complejidad</td><td>Licencia + brecha reducida</td></tr>
+      </table>
+      <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted)">
+        API por caso: <code>comparativo.contextual.externos</code> (desglose) ·
+        <code>comparativo.modo_label</code> · totales en <code>freelancer_total_usd</code>, etc.
+      </p>
+      <p style="margin-top:0.5rem;font-size:0.875rem;color:var(--muted)">
+        Catálogo v2: <code>modelos_default.saas</code> vs <code>modelos_default.enterprise</code>
+        en <code>data/catalogo_mercado.json</code> (implementacion_pct, mantenimiento_pct_anual, brecha_factor).
+      </p>
     </div>
 
     <h2 class="section-title">Fórmulas KPI (por caso)</h2>
@@ -274,7 +299,7 @@ cd ../backend && venv\Scripts\python main.py</pre>
       <a class="btn btn-ghost" href="index.html">← Volver al inicio</a>
     </div>
 
-    <footer>Documentación técnica · Tablero KPIs TOP · 19 Jun 2026</footer>
+    <footer>Documentación técnica · Tablero KPIs TOP · MVP cerrado · 18 Jun 2026</footer>
   </div>
 </body>
 </html>

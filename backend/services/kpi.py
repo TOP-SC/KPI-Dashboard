@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 from typing import Any
 
+from services.comparativa_contexto import calcular_comparativa_contextual
 from services.mercado_apps import resolver_alternativa
 
 
@@ -282,6 +283,15 @@ def _veredicto_discovery(
     )
 
 
+def _fuente_componentes(externo: dict[str, Any]) -> str:
+    if not externo.get("aplica"):
+        return "No aplica a este tipo de caso"
+    desglose = externo.get("desglose") or []
+    if not desglose:
+        return "Sin componentes estimados"
+    return " + ".join(d["label"] for d in desglose)
+
+
 def _calcular_comparativo(
     caso: dict[str, Any],
     horas: float,
@@ -293,6 +303,7 @@ def _calcular_comparativo(
     discovery_cfg: dict[str, float],
     discovery_externo_factor: float,
     brecha_app_pct: float,
+    fases_raw: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     alt = resolver_alternativa(caso)
     app_anual = alt["usd_anual"] if alt else None
@@ -358,8 +369,59 @@ def _calcular_comparativo(
         app_nombre_corto,
     )
 
+    contextual = calcular_comparativa_contextual(
+        caso,
+        inversion_usd=inversion_usd,
+        horas=horas_ext,
+        complejidad=complejidad,
+        hs_discovery_ext=hs_discovery_ext,
+        brecha_app=brecha_app,
+        alt=alt,
+        tarifa_freelancer=tarifa_freelancer,
+        tarifa_empresa=tarifa_empresa,
+        horizonte=horizonte_app,
+        fases_raw=fases_raw or {},
+    )
+
+    ext = contextual["externos"]
+    fl = ext["freelancer"]
+    em = ext["empresa"]
+    ap = ext["app"]
+
+    if fl["aplica"] and fl["total_usd"] is not None:
+        freelancer_total = fl["total_usd"]
+        dev_fl = next((d["usd"] for d in fl["desglose"] if d["id"] == "dev"), 0)
+        freelancer_usd = round(dev_fl, 2)
+        ahorro_vs_freelancer = round(freelancer_total - inversion_usd, 2)
+    else:
+        freelancer_total = None
+        freelancer_usd = None
+        ahorro_vs_freelancer = None
+
+    if em["aplica"] and em["total_usd"] is not None:
+        empresa_total = em["total_usd"]
+        dev_em = next((d["usd"] for d in em["desglose"] if d["id"] == "dev"), 0)
+        empresa_usd = round(dev_em, 2)
+        ahorro_vs_empresa = round(empresa_total - inversion_usd, 2)
+    else:
+        empresa_total = None
+        empresa_usd = None
+        ahorro_vs_empresa = None
+
+    if ap["aplica"] and ap["total_usd"] is not None:
+        app_costo_real = ap["total_usd"]
+        ahorro_vs_app_real = round(app_costo_real - inversion_usd, 2)
+    else:
+        app_costo_real = None
+        ahorro_vs_app_real = None
+
+    fuente_freelancer = _fuente_componentes(fl)
+    fuente_empresa = _fuente_componentes(em)
+
     return {
         "complejidad": complejidad,
+        "modo": contextual["modo"],
+        "modo_label": contextual["modo_label"],
         "discovery_razon": discovery_razon,
         "discovery_horas_top": hs_discovery_top,
         "discovery_desde_sheet": hs_discovery_sheet is not None and hs_discovery_sheet > 0,
@@ -392,9 +454,11 @@ def _calcular_comparativo(
         "fuente_app": fuente_app,
         "fuente_discovery_top": fuente_discovery_top,
         "fuente_discovery_externo": f"Discovery × {discovery_externo_factor} (externo no conoce el negocio)",
-        "fuente_freelancer": f"(Hs dev + discovery externo) × tarifas mercado",
-        "fuente_empresa": f"(Hs dev + discovery externo) × tarifa agencia",
+        "fuente_freelancer": fuente_freelancer,
+        "fuente_empresa": fuente_empresa,
         "horizonte_app_anios": horizonte_app,
+        "contextual": contextual,
+        "ejecutivo": contextual["ejecutivo"],
     }
 
 
@@ -448,6 +512,7 @@ def enriquecer_caso(
         discovery_cfg,
         discovery_externo_factor,
         brecha_app_pct,
+        fases_raw=caso.get("fases") or {},
     )
 
     fases_raw = caso.get("fases") or {}

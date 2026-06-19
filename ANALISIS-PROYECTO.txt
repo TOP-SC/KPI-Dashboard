@@ -1,6 +1,6 @@
 # TABLERO DE KPIs TOP — Análisis consolidado
 # Fuente: pizarra + audios transcritos (18/06/2026)
-# Última actualización implementación: 19/06/2026
+# Última actualización implementación: 18/06/2026 — cierre MVP
 
 ================================================================================
 1. OBJETIVO DEL TABLERO
@@ -46,10 +46,19 @@ VALOR CONOCIMIENTO INTERNO (Comparativos — "Discovery TOP acumulado")
     - Si no → estimado por complejidad (baja ~10h, media ~25h, alta ~40h)
       según contexto del caso (ERP, Comex, stack custom, alertas simples, etc.)
 
-COMPARATIVOS EXTERNOS
-  Freelancer = (hs_dev × 75) + (discovery × 1.5 × 75)
-  Empresa    = (hs_dev × 100) + (discovery × 1.5 × 100)
-  App real   = licencia catálogo SaaS × 3 años + brecha adaptación
+COMPARATIVOS EXTERNOS (motor contextual — comparativa_contexto.py)
+  Clasifica cada caso en modalidad:
+    script_ligero | desarrollo_medida | integracion_enterprise | saas_encaje
+  Activa componentes solo cuando aplican:
+    dev, discovery, implementación, fee, licencia, nube, mantenimiento, brecha
+  Freelancer / Empresa / App: totales desde desglose contextual
+  Catálogo v2: modelos saas vs enterprise (impl %, mant %, brecha factor)
+  UI: popup detalle → sección "Desglose externo · según modalidad"
+
+  Legacy (referencia):
+  Freelancer ≈ (hs_dev × 75) + (discovery × 1.5 × 75)  [+ nube si aplica]
+  Empresa    ≈ (hs_dev × 100) + discovery + impl + fee [según modalidad]
+  App real   = licencia × 3 años + impl + mant + brecha [según modelo app]
   Apps desde data/catalogo_mercado.json (NO columnas manuales del Drive)
 
 ================================================================================
@@ -73,7 +82,8 @@ Sheet ID: 1xjKnaJBcKVPBQAY-DLJQQeFP9oW3A2o5TDszKSJm4_o  GID: 1156348848
 
   React + Vite + Tailwind + Recharts  ←→  FastAPI (Python)
   Fuentes: Google Sheet (vivo) → caché data/casos.json
-  Catálogo apps: data/catalogo_mercado.json
+  Catálogo apps: data/catalogo_mercado.json (v2, modelos saas/enterprise)
+  Comparativa contextual: backend/services/comparativa_contexto.py
   Arranque: iniciar.bat · Docs: ver-documentacion.bat → docs/
   Repo: https://github.com/TOP-SC/KPI-Dashboard
 
@@ -89,21 +99,24 @@ Sheet ID: 1xjKnaJBcKVPBQAY-DLJQQeFP9oW3A2o5TDszKSJm4_o  GID: 1156348848
   Ganancia anual referencia: USD 14.400 + conocimiento
 
 ================================================================================
-6. ESTADO DEL PROYECTO (19/06/2026)
+6. ESTADO DEL PROYECTO (18/06/2026 — CIERRE MVP)
 ================================================================================
 
-HECHO:
+ENTREGADO (MVP cerrado ~95%):
   - Dashboard modelo pizarra (3 bloques: Invertimos · Liberamos · Evitamos)
   - Pestañas Dashboard, Comparativos, Casos a revisar
   - Sheet en vivo + botón Actualizar + parser por headers
-  - Catálogo mercado SaaS (27 apps)
+  - Catálogo mercado SaaS (27 apps, modelos saas/enterprise)
+  - Comparativa contextual (fee/impl/nube solo cuando aplica)
   - Discovery estimado + soporte columna sheet
   - Dólar automático dolarapi
   - Documentación HTML en docs/
-  - Popup detalle comparativos por caso
+  - Popup detalle comparativos con desglose por modalidad
+  - Repo GitHub publicado y actualizado
 
-PENDIENTE:
+BACKLOG POST-MVP (operación / datos):
   - Cargar Discovery (hs) real en sheet por cada caso
-  - Desglose fases inversión en sheet
-  - Deploy interno / acceso equipo
+  - Desglose fases inversión en sheet (Diseño, Dev, Fee, Nube)
+  - Deploy interno / acceso equipo ampliado
   - Export PDF ejecutivo
+  - Refinar catálogo mercado (precios tier AR)

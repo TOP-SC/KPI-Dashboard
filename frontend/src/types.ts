@@ -12,8 +12,26 @@ export interface KpiCaso {
   cotizacion_dolar: number
 }
 
+export interface ComparativoEjecutivo {
+  veredicto_corto: string
+  mejor_externo: 'freelancer' | 'empresa' | 'app' | null
+  mejor_externo_label: string
+  ahorro_usd: number | null
+  ahorro_pct: number | null
+  barras: Array<{ id: string; label: string; usd: number; aplica: boolean }>
+}
+
+export interface ComparativoExterno {
+  aplica: boolean
+  total_usd: number | null
+  desglose: Array<{ id: string; label: string; usd: number }>
+  componentes_activos: string[]
+}
+
 export interface ComparativoCaso {
   complejidad: 'baja' | 'media' | 'alta'
+  modo?: string
+  modo_label?: string
   discovery_razon: string
   discovery_horas_top: number
   discovery_desde_sheet: boolean
@@ -33,10 +51,10 @@ export interface ComparativoCaso {
   app_mercado_alternativas: string[]
   app_mercado_categoria: string | null
   horas_conocimiento_total: number
-  freelancer_usd: number
-  empresa_usd: number
-  freelancer_total_usd: number
-  empresa_total_usd: number
+  freelancer_usd: number | null
+  empresa_usd: number | null
+  freelancer_total_usd: number | null
+  empresa_total_usd: number | null
   ahorro_vs_freelancer: number | null
   ahorro_vs_empresa: number | null
   ahorro_vs_app: number | null
@@ -49,6 +67,16 @@ export interface ComparativoCaso {
   fuente_freelancer: string
   fuente_empresa: string
   horizonte_app_anios: number
+  ejecutivo?: ComparativoEjecutivo
+  contextual?: {
+    modo: string
+    modo_label: string
+    externos: {
+      freelancer: ComparativoExterno
+      empresa: ComparativoExterno
+      app: ComparativoExterno
+    }
+  }
 }
 
 export interface Caso {

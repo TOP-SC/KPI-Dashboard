@@ -1,10 +1,23 @@
 {
-  "version": 1,
+  "version": 2,
   "nota": "Precios orientativos USD/año (planes SMB o mid-market). Referencias públicas 2025-2026. No usa columnas del Drive.",
+  "modelos_default": {
+    "saas": {
+      "implementacion_pct": 0,
+      "mantenimiento_pct_anual": 0,
+      "brecha_factor": 0.85
+    },
+    "enterprise": {
+      "implementacion_pct": 0.75,
+      "mantenimiento_pct_anual": 0.18,
+      "brecha_factor": 1.25
+    }
+  },
   "apps": {
     "power_automate": {
       "nombre": "Microsoft Power Automate",
       "categoria": "automatizacion_alertas",
+      "modelo_costo": "saas",
       "keywords": ["aviso", "alerta", "ncp", "opc", "notific", "slack", "teams", "workflow"],
       "usd_anual": 900,
       "pricing_ref": "Power Automate Premium ~USD 15/usuario/mes (ref. 5 usuarios)"
@@ -19,6 +32,7 @@
     "sap_gts": {
       "nombre": "SAP Global Trade Services (GTS)",
       "categoria": "comex",
+      "modelo_costo": "enterprise",
       "keywords": ["comex", "aduana", "import", "export", "trade", "customs"],
       "usd_anual": 18000,
       "pricing_ref": "Licencia mid-market anual estimada (SAP GTS / compliance comercio exterior)"
@@ -89,6 +103,7 @@
     "relex": {
       "nombre": "RELEX Solutions",
       "categoria": "abastecimiento",
+      "modelo_costo": "enterprise",
       "keywords": ["abastecimiento", "replenishment", "retail", "sucursal"],
       "usd_anual": 35000,
       "pricing_ref": "Suite supply chain retail (mid-market, anual estimado)"
@@ -173,6 +188,7 @@
     "coupa": {
       "nombre": "Coupa Procurement",
       "categoria": "compras",
+      "modelo_costo": "enterprise",
       "keywords": ["compra", "procurement", "aprobacion compra"],
       "usd_anual": 25000,
       "pricing_ref": "Procurement cloud enterprise (anual estimado)"

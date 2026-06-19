@@ -25,21 +25,21 @@
       </p>
       <div class="meta-row">
         <span class="pill"><strong>Inicio</strong> 18 Jun 2026</span>
-        <span class="pill"><strong>Fase</strong> MVP + comparativos</span>
-        <span class="pill"><strong>Progreso global</strong> 85%</span>
+        <span class="pill"><strong>Fase</strong> MVP cerrado</span>
+        <span class="pill"><strong>Progreso global</strong> 95%</span>
       </div>
     </header>
 
     <div class="card ring-wrap">
-      <div class="ring" style="--p:85"><span>85%</span></div>
+      <div class="ring" style="--p:95"><span>95%</span></div>
       <div>
         <h2 style="font-size:1.1rem;color:white;text-transform:none;letter-spacing:0;margin-bottom:0.5rem">
-          Avance general del MVP
+          MVP cerrado — Tablero KPIs TOP
         </h2>
         <p style="color:var(--muted);font-size:0.95rem;max-width:36rem">
-          Tablero operativo con modelo pizarra en UI (Invertimos · Liberamos · Evitamos),
-          comparativos vs mercado SaaS, sheet en vivo, dólar automático y documentación HTML.
-          Pendiente: cargar Discovery (hs) real en la planilla y deploy interno.
+          Tablero operativo con modelo pizarra, comparativa contextual (fee/impl/nube solo cuando aplica),
+          catálogo SaaS v2, sheet en vivo, dólar automático y documentación completa.
+          Backlog post-MVP: datos reales en sheet (Discovery hs) y deploy interno.
         </p>
       </div>
     </div>
@@ -61,12 +61,16 @@
         <div class="bar"><i style="width:90%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Comparativos + catálogo mercado SaaS</span><span>90%</span></div>
-        <div class="bar"><i style="width:90%"></i></div>
+        <div class="progress-head"><span>Comparativos + catálogo mercado SaaS</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Valor conocimiento / discovery</span><span>85%</span></div>
-        <div class="bar"><i style="width:85%"></i></div>
+        <div class="progress-head"><span>Comparativa contextual (modalidad + componentes)</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Valor conocimiento / discovery</span><span>90%</span></div>
+        <div class="bar"><i style="width:90%"></i></div>
       </div>
       <div class="progress-block">
         <div class="progress-head"><span>Dólar automático (dolarapi)</span><span>100%</span></div>
@@ -155,13 +159,21 @@
           <h4>Documentación HTML</h4>
           <p>docs/index · avances · tecnica + ver-documentacion.bat. Análisis actualizado en ANALISIS-PROYECTO.txt.</p>
         </div>
+        <div class="t-item done">
+          <h4>Comparativa contextual</h4>
+          <p>Motor <code>comparativa_contexto.py</code>: modalidad del caso + componentes (fee, impl, nube) solo cuando aplican. Desglose en popup.</p>
+        </div>
+        <div class="t-item done">
+          <h4>Cierre MVP</h4>
+          <p>Tablero listo para uso interno. Repo GitHub actualizado. Documentación de cierre.</p>
+        </div>
         <div class="t-item next">
           <h4>Discovery (hs) en sheet</h4>
           <p>Columna real por caso — reemplaza estimación algorítmica. Parser listo.</p>
         </div>
         <div class="t-item next">
           <h4>Fases inversión en sheet</h4>
-          <p>Diseño, Dev, Implementación, Fee, Nube — columnas opcionales ya soportadas.</p>
+          <p>Diseño, Dev, Implementación, Fee, Nube — columnas opcionales ya soportadas en parser; alimentan comparativa contextual.</p>
         </div>
         <div class="t-item next">
           <h4>Deploy interno</h4>
@@ -187,11 +199,11 @@
       <div class="card">
         <h3>Comparativos</h3>
         <ul class="checklist">
-          <li><span class="icon ok">✓</span><span>Freelancer + discovery externo</span></li>
-          <li><span class="icon ok">✓</span><span>Empresa dev + discovery</span></li>
-          <li><span class="icon ok">✓</span><span>App mercado (catálogo SaaS)</span></li>
+          <li><span class="icon ok">✓</span><span>Comparativa contextual por modalidad</span></li>
+          <li><span class="icon ok">✓</span><span>Desglose fee / impl / nube en popup</span></li>
+          <li><span class="icon ok">✓</span><span>Catálogo v2 (modelos saas vs enterprise)</span></li>
           <li><span class="icon ok">✓</span><span>Valor conocimiento = Σ discovery × 50</span></li>
-          <li><span class="icon ok">✓</span><span>Tabla compacta + popup detalle</span></li>
+          <li><span class="icon ok">✓</span><span>Tabla + popup detalle (UI original)</span></li>
         </ul>
       </div>
       <div class="card">
@@ -206,8 +218,8 @@
       </div>
     </div>
 
-    <h2 class="section-title">Backlog — próximas iteraciones</h2>
-    <p class="section-sub">Pendiente para cerrar la visión completa de la pizarra</p>
+    <h2 class="section-title">Backlog — post-MVP</h2>
+    <p class="section-sub">Mejoras de datos y operación (fuera del alcance del cierre actual)</p>
 
     <div class="card">
       <ul class="checklist">
@@ -232,7 +244,7 @@
       <a class="btn btn-ghost" href="index.html">← Volver al inicio</a>
     </div>
 
-    <footer>Última actualización: 19 Jun 2026 · Tablero KPIs TOP</footer>
+    <footer>Última actualización: 18 Jun 2026 · MVP cerrado · Tablero KPIs TOP</footer>
   </div>
 </body>
 </html>

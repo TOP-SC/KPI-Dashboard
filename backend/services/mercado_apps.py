@@ -10,6 +10,19 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent.parent
 CATALOGO_PATH = ROOT / "data" / "catalogo_mercado.json"
 
+CATEGORIAS_ENTERPRISE = frozenset(
+    {
+        "comex",
+        "compras",
+        "abastecimiento",
+        "rrhh_payroll",
+        "auditoria",
+        "inteligencia_competitiva",
+        "logistica_fletes",
+        "costos",
+    }
+)
+
 
 def _texto_busqueda(caso: dict[str, Any]) -> str:
     partes = [
@@ -27,8 +40,33 @@ def _texto_busqueda(caso: dict[str, Any]) -> str:
 @lru_cache(maxsize=1)
 def _cargar_catalogo() -> dict[str, Any]:
     if not CATALOGO_PATH.exists():
-        return {"apps": {}, "caso_overrides": {}, "nota": ""}
+        return {"apps": {}, "caso_overrides": {}, "modelos_default": {}, "nota": ""}
     return json.loads(CATALOGO_PATH.read_text(encoding="utf-8"))
+
+
+def _modelo_costo_app(app: dict[str, Any]) -> str:
+    explicito = app.get("modelo_costo")
+    if explicito in ("saas", "enterprise"):
+        return explicito
+    if app.get("categoria") in CATEGORIAS_ENTERPRISE:
+        return "enterprise"
+    if float(app.get("usd_anual", 0)) >= 10000:
+        return "enterprise"
+    return "saas"
+
+
+def _params_modelo(app: dict[str, Any], catalogo: dict[str, Any]) -> dict[str, float]:
+    defaults = catalogo.get("modelos_default", {})
+    tipo = _modelo_costo_app(app)
+    base = defaults.get(tipo, {})
+    return {
+        "modelo_costo": tipo,
+        "implementacion_pct": float(app.get("implementacion_pct", base.get("implementacion_pct", 0))),
+        "mantenimiento_pct_anual": float(
+            app.get("mantenimiento_pct_anual", base.get("mantenimiento_pct_anual", 0))
+        ),
+        "brecha_factor": float(app.get("brecha_factor", base.get("brecha_factor", 1.0))),
+    }
 
 
 def _score_app(texto: str, app: dict[str, Any]) -> int:
@@ -75,6 +113,7 @@ def resolver_alternativa(caso: dict[str, Any]) -> dict[str, Any] | None:
         return None
 
     app = apps[app_id]
+    modelo = _params_modelo(app, catalogo)
     alternativas = [
         apps[aid]["nombre"]
         for aid, alt in apps.items()
@@ -90,5 +129,7 @@ def resolver_alternativa(caso: dict[str, Any]) -> dict[str, Any] | None:
         "pricing_ref": app.get("pricing_ref", ""),
         "match_por": match_por,
         "alternativas": alternativas,
+        "modelo_costo": modelo["modelo_costo"],
+        "modelo": modelo,
         "fuente": "Catálogo mercado SaaS (precios públicos orientativos)",
     }
