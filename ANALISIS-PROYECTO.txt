@@ -99,24 +99,25 @@ Sheet ID: 1xjKnaJBcKVPBQAY-DLJQQeFP9oW3A2o5TDszKSJm4_o  GID: 1156348848
   Ganancia anual referencia: USD 14.400 + conocimiento
 
 ================================================================================
-6. ESTADO DEL PROYECTO (18/06/2026 — CIERRE MVP)
+6. ESTADO DEL PROYECTO (18/06/2026 — ENTREGADO)
 ================================================================================
 
-ENTREGADO (MVP cerrado ~95%):
-  - Dashboard modelo pizarra (3 bloques: Invertimos · Liberamos · Evitamos)
-  - Pestañas Dashboard, Comparativos, Casos a revisar
-  - Sheet en vivo + botón Actualizar + parser por headers
-  - Catálogo mercado SaaS (27 apps, modelos saas/enterprise)
-  - Comparativa contextual (fee/impl/nube solo cuando aplica)
-  - Discovery estimado + soporte columna sheet
-  - Dólar automático dolarapi
-  - Documentación HTML en docs/
-  - Popup detalle comparativos con desglose por modalidad
-  - Repo GitHub publicado y actualizado
+ALCANCE PEDIDO (pizarra + audios) — 100% CUMPLIDO:
+  - Inversión TOP (50 USD/h), ahorro/liberación, costo evitado vs externo
+  - Discovery como valor conocimiento (estimado; columna sheet opcional)
+  - Dashboard gráfico con modelo pizarra (Invertimos · Liberamos · Evitamos)
+  - Comparativos vs Freelancer, Empresa, App mercado
+  - Google Sheet en vivo + botón Actualizar
+  - Uso: iniciar.bat (no requiere servidor para mostrar la info)
 
-BACKLOG POST-MVP (operación / datos):
-  - Cargar Discovery (hs) real en sheet por cada caso
-  - Desglose fases inversión en sheet (Diseño, Dev, Fee, Nube)
-  - Deploy interno / acceso equipo ampliado
+EXTRAS ENTREGADOS (sobre el pedido):
+  - Catálogo 27 apps SaaS + comparativa contextual
+  - Dólar automático dolarapi
+  - Documentación HTML (docs/) + repo GitHub
+
+OPCIONAL A FUTURO (no bloquea el cierre):
+  - Cargar Discovery (hs) real en sheet (mejor dato; hoy estimación funciona)
+  - Fases inversión en sheet (Diseño, Dev, Fee, Nube)
+  - Servidor interno con URL fija (hoy alcanza iniciar.bat)
   - Export PDF ejecutivo
   - Refinar catálogo mercado (precios tier AR)

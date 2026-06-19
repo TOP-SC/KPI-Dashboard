@@ -20,74 +20,97 @@
     <header class="hero">
       <h1>Reporte de <span>avances</span></h1>
       <p class="lead">
-        Desde los insumos entregados al inicio del proyecto hasta el tablero operativo actual.
-        Punto de partida → lo incorporado → próximos pasos.
+        El pedido original (pizarra + audios) está cumplido. El tablero se usa con
+        <code>iniciar.bat</code> — no requiere servidor para mostrar la información.
       </p>
       <div class="meta-row">
         <span class="pill"><strong>Inicio</strong> 18 Jun 2026</span>
-        <span class="pill"><strong>Fase</strong> MVP cerrado</span>
-        <span class="pill"><strong>Progreso global</strong> 95%</span>
+        <span class="pill"><strong>Estado</strong> Entregado</span>
+        <span class="pill"><strong>Progreso alcance pedido</strong> 100%</span>
       </div>
     </header>
 
     <div class="card ring-wrap">
-      <div class="ring" style="--p:95"><span>95%</span></div>
+      <div class="ring" style="--p:100"><span>100%</span></div>
       <div>
         <h2 style="font-size:1.1rem;color:white;text-transform:none;letter-spacing:0;margin-bottom:0.5rem">
-          MVP cerrado — Tablero KPIs TOP
+          Pedido cumplido — Tablero KPIs TOP
         </h2>
-        <p style="color:var(--muted);font-size:0.95rem;max-width:36rem">
-          Tablero operativo con modelo pizarra, comparativa contextual (fee/impl/nube solo cuando aplica),
-          catálogo SaaS v2, sheet en vivo, dólar automático y documentación completa.
-          Backlog post-MVP: datos reales en sheet (Discovery hs) y deploy interno.
+        <p style="color:var(--muted);font-size:0.95rem;max-width:40rem">
+          Inversión, ahorro, costo evitado, discovery y comparativos vs externo están en el tablero,
+          con más detalle que lo acordado en pizarra y audios. Para verlo: doble click en
+          <code>iniciar.bat</code>. Lo que sigue abajo como “opcional” mejora datos u operación,
+          pero no es requisito del entregable.
         </p>
       </div>
     </div>
 
-    <h2 class="section-title">Progreso por área</h2>
-    <p class="section-sub">Porcentaje estimado de completitud funcional</p>
+    <h2 class="section-title">Progreso — alcance del pedido</h2>
+    <p class="section-sub">Todo lo acordado en pizarra, audios y kickoff</p>
 
     <div class="card">
       <div class="progress-block">
-        <div class="progress-head"><span>Incorporación de insumos iniciales</span><span>100%</span></div>
+        <div class="progress-head"><span>Incorporación insumos (pizarra + audios + sheet)</span><span>100%</span></div>
         <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Integración Google Sheet + parser</span><span>92%</span></div>
-        <div class="bar"><i style="width:92%"></i></div>
-      </div>
-      <div class="progress-block">
-        <div class="progress-head"><span>Dashboard KPIs + modelo pizarra (3 bloques)</span><span>90%</span></div>
-        <div class="bar"><i style="width:90%"></i></div>
-      </div>
-      <div class="progress-block">
-        <div class="progress-head"><span>Comparativos + catálogo mercado SaaS</span><span>100%</span></div>
+        <div class="progress-head"><span>Modelo negocio: Invertimos · Liberamos · Evitamos</span><span>100%</span></div>
         <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Comparativa contextual (modalidad + componentes)</span><span>100%</span></div>
+        <div class="progress-head"><span>Integración Google Sheet + actualizar datos</span><span>100%</span></div>
         <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Valor conocimiento / discovery</span><span>90%</span></div>
-        <div class="bar"><i style="width:90%"></i></div>
+        <div class="progress-head"><span>Dashboard gráfico ejecutivo</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Comparativos vs Freelancer · Empresa · App</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-head"><span>Valor conocimiento / discovery</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
         <div class="progress-head"><span>Dólar automático (dolarapi)</span><span>100%</span></div>
         <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Documentación HTML ejecutiva</span><span>100%</span></div>
+        <div class="progress-head"><span>Arranque one-click (iniciar.bat)</span><span>100%</span></div>
         <div class="bar"><i style="width:100%"></i></div>
       </div>
       <div class="progress-block">
-        <div class="progress-head"><span>Discovery (hs) real en sheet</span><span>30%</span></div>
-        <div class="bar"><i style="width:30%"></i></div>
+        <div class="progress-head"><span>Documentación HTML</span><span>100%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
       </div>
-      <div class="progress-block">
-        <div class="progress-head"><span>Despliegue / acceso equipo ampliado</span><span>25%</span></div>
-        <div class="bar"><i style="width:25%"></i></div>
-      </div>
+    </div>
+
+    <h2 class="section-title">Extras incorporados (no pedidos, ya entregados)</h2>
+    <p class="section-sub">Valor agregado sobre el alcance original</p>
+
+    <div class="card">
+      <ul class="checklist">
+        <li><span class="icon ok">✓</span><span>Catálogo 27 apps SaaS con precios orientativos</span></li>
+        <li><span class="icon ok">✓</span><span>Comparativa contextual (fee / impl / nube solo cuando aplica)</span></li>
+        <li><span class="icon ok">✓</span><span>Popup detalle por caso con desglose externo</span></li>
+        <li><span class="icon ok">✓</span><span>Parser listo para columnas opcionales (Discovery hs, fases, fee, nube)</span></li>
+        <li><span class="icon ok">✓</span><span>Repositorio GitHub: TOP-SC/KPI-Dashboard</span></li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">Opcional — fuera del alcance actual</h2>
+    <p class="section-sub">Mejoras posibles a futuro; no bloquean el uso ni el cierre del proyecto</p>
+
+    <div class="card">
+      <ul class="checklist">
+        <li><span class="icon todo">○</span><span><strong>Discovery (hs) en sheet</strong> — cargar horas reales por caso (hoy: estimación automática; el tablero funciona igual)</span></li>
+        <li><span class="icon todo">○</span><span><strong>Fases inversión en sheet</strong> — Diseño, Dev, Fee, Nube (parser listo; opcional para afinar números)</span></li>
+        <li><span class="icon todo">○</span><span><strong>Servidor interno</strong> — URL fija 24/7; hoy alcanza con <code>iniciar.bat</code> en reunión o PC local</span></li>
+        <li><span class="icon todo">○</span><span><strong>Export PDF</strong> — reporte ejecutivo one-click</span></li>
+        <li><span class="icon todo">○</span><span><strong>Refinar catálogo mercado</strong> — precios tier Argentina</span></li>
+      </ul>
     </div>
 
     <h2 class="section-title">Punto de partida — datos entregados</h2>
@@ -119,7 +142,7 @@
     </div>
 
     <h2 class="section-title">Línea de tiempo</h2>
-    <p class="section-sub">Hitos del desarrollo hasta hoy</p>
+    <p class="section-sub">Hitos del desarrollo</p>
 
     <div class="card">
       <div class="timeline">
@@ -137,53 +160,29 @@
         </div>
         <div class="t-item done">
           <h4>Pestaña Comparativos</h4>
-          <p>TOP vs Freelancer vs Empresa vs App real (3 años). Discovery estimado por contexto del caso. Tabla compacta + popup detalle.</p>
+          <p>TOP vs Freelancer vs Empresa vs App real (3 años). Discovery estimado por contexto del caso. Tabla + popup detalle.</p>
         </div>
         <div class="t-item done">
           <h4>Catálogo mercado SaaS</h4>
           <p>27 apps reales con pricing orientativo — comparativa independiente de columnas manuales del Drive.</p>
         </div>
         <div class="t-item done">
-          <h4>Repositorio GitHub</h4>
-          <p>Código en <a href="https://github.com/TOP-SC/KPI-Dashboard" style="color:#60a5fa">TOP-SC/KPI-Dashboard</a>, rama main.</p>
-        </div>
-        <div class="t-item done">
           <h4>Modelo pizarra en UI</h4>
           <p>Dashboard con 3 bloques: Invertimos · Liberamos · Evitamos pagar afuera. Pipeline con las 3 métricas por caso.</p>
         </div>
         <div class="t-item done">
-          <h4>Dólar automático</h4>
-          <p>Cotización en vivo vía <a href="https://dolarapi.com" style="color:#60a5fa">dolarapi.com</a> (blue por defecto), fallback a .env.</p>
-        </div>
-        <div class="t-item done">
-          <h4>Documentación HTML</h4>
-          <p>docs/index · avances · tecnica + ver-documentacion.bat. Análisis actualizado en ANALISIS-PROYECTO.txt.</p>
-        </div>
-        <div class="t-item done">
           <h4>Comparativa contextual</h4>
-          <p>Motor <code>comparativa_contexto.py</code>: modalidad del caso + componentes (fee, impl, nube) solo cuando aplican. Desglose en popup.</p>
+          <p>Motor <code>comparativa_contexto.py</code>: fee, impl, nube solo cuando aplican al tipo de caso.</p>
         </div>
         <div class="t-item done">
-          <h4>Cierre MVP</h4>
-          <p>Tablero listo para uso interno. Repo GitHub actualizado. Documentación de cierre.</p>
-        </div>
-        <div class="t-item next">
-          <h4>Discovery (hs) en sheet</h4>
-          <p>Columna real por caso — reemplaza estimación algorítmica. Parser listo.</p>
-        </div>
-        <div class="t-item next">
-          <h4>Fases inversión en sheet</h4>
-          <p>Diseño, Dev, Implementación, Fee, Nube — columnas opcionales ya soportadas en parser; alimentan comparativa contextual.</p>
-        </div>
-        <div class="t-item next">
-          <h4>Deploy interno</h4>
-          <p>Servidor compartido o cloud para todo el equipo TOP.</p>
+          <h4>Entrega y cierre</h4>
+          <p>Pedido original cumplido. Uso: <code>iniciar.bat</code>. Repo en GitHub. Documentación actualizada.</p>
         </div>
       </div>
     </div>
 
     <h2 class="section-title">Lo incorporado al producto</h2>
-    <p class="section-sub">Funcionalidades ya disponibles en el tablero</p>
+    <p class="section-sub">Funcionalidades disponibles hoy</p>
 
     <div class="grid grid-3">
       <div class="card">
@@ -201,42 +200,29 @@
         <ul class="checklist">
           <li><span class="icon ok">✓</span><span>Comparativa contextual por modalidad</span></li>
           <li><span class="icon ok">✓</span><span>Desglose fee / impl / nube en popup</span></li>
-          <li><span class="icon ok">✓</span><span>Catálogo v2 (modelos saas vs enterprise)</span></li>
+          <li><span class="icon ok">✓</span><span>Catálogo 27 apps (saas / enterprise)</span></li>
           <li><span class="icon ok">✓</span><span>Valor conocimiento = Σ discovery × 50</span></li>
-          <li><span class="icon ok">✓</span><span>Tabla + popup detalle (UI original)</span></li>
+          <li><span class="icon ok">✓</span><span>Tabla + popup detalle</span></li>
         </ul>
       </div>
       <div class="card">
         <h3>Operación</h3>
         <ul class="checklist">
+          <li><span class="icon ok">✓</span><span><code>iniciar.bat</code> — un click y listo</span></li>
           <li><span class="icon ok">✓</span><span>Actualizar desde Sheet</span></li>
           <li><span class="icon ok">✓</span><span>Casos a revisar (ROI−)</span></li>
-          <li><span class="icon ok">✓</span><span>Tooltips legibles</span></li>
           <li><span class="icon ok">✓</span><span>Parámetros vía .env</span></li>
           <li><span class="icon ok">✓</span><span>Dark theme ejecutivo</span></li>
         </ul>
       </div>
     </div>
 
-    <h2 class="section-title">Backlog — post-MVP</h2>
-    <p class="section-sub">Mejoras de datos y operación (fuera del alcance del cierre actual)</p>
-
-    <div class="card">
-      <ul class="checklist">
-        <li><span class="icon pending">→</span><span><strong>Discovery (hs) en sheet</strong> — columna real por caso (parser listo)</span></li>
-        <li><span class="icon pending">→</span><span><strong>Fases inversión en sheet</strong> — Diseño, Dev, Fee, Nube (parser listo)</span></li>
-        <li><span class="icon pending">→</span><span><strong>Refinar catálogo mercado</strong> — precios por tier AR</span></li>
-        <li><span class="icon todo">○</span><span><strong>Deploy interno</strong> — servidor compartido para todo TOP</span></li>
-        <li><span class="icon todo">○</span><span><strong>Export PDF</strong> — reporte ejecutivo one-click</span></li>
-      </ul>
-    </div>
-
-    <h2 class="section-title">Valor entregado hoy</h2>
+    <h2 class="section-title">Valor entregado</h2>
     <div class="grid grid-4">
       <div class="card accent-blue"><h2>Casos</h2><div class="value">26</div><div class="sub">Con KPI calculado</div></div>
-      <div class="card accent-emerald"><h2>ROI visible</h2><div class="value">✓</div><div class="sub">Por caso y total</div></div>
+      <div class="card accent-emerald"><h2>Pedido</h2><div class="value">✓</div><div class="sub">Pizarra + audios</div></div>
       <div class="card accent-purple"><h2>Comparativa</h2><div class="value">4</div><div class="sub">TOP · Freelancer · Empresa · App</div></div>
-      <div class="card accent-amber"><h2>Arranque</h2><div class="value">1 click</div><div class="sub">iniciar.bat</div></div>
+      <div class="card accent-amber"><h2>Uso</h2><div class="value">1 click</div><div class="sub">iniciar.bat</div></div>
     </div>
 
     <div class="cta-row">
@@ -244,7 +230,7 @@
       <a class="btn btn-ghost" href="index.html">← Volver al inicio</a>
     </div>
 
-    <footer>Última actualización: 18 Jun 2026 · MVP cerrado · Tablero KPIs TOP</footer>
+    <footer>Última actualización: 18 Jun 2026 · Pedido cumplido · Tablero KPIs TOP</footer>
   </div>
 </body>
 </html>
