@@ -46,6 +46,12 @@ VALOR CONOCIMIENTO INTERNO (Comparativos — "Discovery TOP acumulado")
     - Si no → estimado por complejidad (baja ~10h, media ~25h, alta ~40h)
       según contexto del caso (ERP, Comex, stack custom, alertas simples, etc.)
 
+PIZARRA (3 bloques UI — resumen.pizarra)
+  Alcance: solo casos estado REALIZADO (apps entregadas)
+  Invertimos · Liberamos · Evitamos: suman solo entregadas
+  Vista Mes/Año en frontend escala esos totales
+  El resto del resumen (total casos, pipeline, comparativos pestaña) = portfolio completo
+
 COMPARATIVOS EXTERNOS (motor contextual — comparativa_contexto.py)
   Clasifica cada caso en modalidad:
     script_ligero | desarrollo_medida | integracion_enterprise | saas_encaje

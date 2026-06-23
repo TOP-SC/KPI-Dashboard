@@ -71,7 +71,9 @@ export function PizarraHero({ data }: { data: DashboardData }) {
         ? 'vs empresa desarrolladora'
         : 'vs freelancer'
 
-  const roiAnual = data.resumen.roi_total_usd
+  const roiAnual = p.roi_usd
+  const entregados = p.casos_entregados ?? 0
+  const totalCasos = data.resumen.total_casos
 
   const invertimosUsd = p.invertimos_usd * factor
   const conocimientoUsd = p.conocimiento_usd * factor
@@ -108,6 +110,9 @@ export function PizarraHero({ data }: { data: DashboardData }) {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">Modelo pizarra</p>
           <h2 className="mt-1 text-xl font-bold text-white md:text-2xl">Valor TOP en tres dimensiones</h2>
+          <p className="mt-1 text-xs text-slate-500">
+            Solo apps entregadas ({entregados} de {totalCasos} casos)
+          </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <div
@@ -148,7 +153,7 @@ export function PizarraHero({ data }: { data: DashboardData }) {
           lines={[
             horasInvLabel,
             `${fmtNum(p.conocimiento_horas)} hs discovery · ${fmtUsd(conocimientoUsd)}`,
-            `${data.resumen.total_casos} casos activos`,
+            `${entregados} apps entregadas`,
           ]}
         />
         <PizarraBlock

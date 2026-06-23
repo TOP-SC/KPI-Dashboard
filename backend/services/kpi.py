@@ -597,6 +597,18 @@ def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
     discovery_horas_total = 0.0
     pro_top = 0
 
+    # Pizarra: solo apps entregadas (estado realizado)
+    p_inv = 0.0
+    p_ahorro_usd = 0.0
+    p_horas_inv = 0.0
+    p_horas_ahorro = 0.0
+    p_vs_freelancer = 0.0
+    p_vs_empresa = 0.0
+    p_vs_app = 0.0
+    p_conocimiento_usd = 0.0
+    p_discovery_horas = 0.0
+    casos_entregados = 0
+
     for c in casos:
         por_estado[c["estado"]] = por_estado.get(c["estado"], 0) + 1
         if c["kpi"]["roi_usd"] < 0:
@@ -613,7 +625,26 @@ def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
         if comp.get("veredicto") == "pro_top":
             pro_top += 1
 
+        if c["estado"] != "realizado":
+            continue
+
+        casos_entregados += 1
+        p_inv += c["kpi"]["inversion_usd"]
+        p_ahorro_usd += c["kpi"]["ahorro_anual_usd"]
+        p_horas_inv += c["kpi"]["horas_invertidas"]
+        p_horas_ahorro += c["kpi"]["horas_ahorradas_anual"]
+        p_conocimiento_usd += comp.get("valor_conocimiento_interno_usd", 0)
+        p_discovery_horas += comp.get("discovery_horas_top", 0)
+        if comp.get("ahorro_vs_freelancer") is not None:
+            p_vs_freelancer += comp["ahorro_vs_freelancer"]
+        if comp.get("ahorro_vs_empresa") is not None:
+            p_vs_empresa += comp["ahorro_vs_empresa"]
+        if comp.get("ahorro_vs_app_real") is not None:
+            p_vs_app += comp["ahorro_vs_app_real"]
+
     evitamos_usd = max(ahorro_vs_freelancer, ahorro_vs_empresa, ahorro_vs_app_real)
+    p_evitamos_usd = max(p_vs_freelancer, p_vs_empresa, p_vs_app)
+    p_roi = p_ahorro_usd - p_inv
 
     return {
         "total_casos": len(casos),
@@ -625,16 +656,19 @@ def calcular_resumen(casos: list[dict[str, Any]]) -> dict[str, Any]:
         "casos_roi_negativo": negativos,
         "por_estado": por_estado,
         "pizarra": {
-            "invertimos_usd": round(total_inv, 2),
-            "invertimos_horas_dev": total_horas_inv,
-            "conocimiento_usd": round(valor_conocimiento_total, 2),
-            "conocimiento_horas": round(discovery_horas_total, 1),
-            "liberamos_usd_anual": round(total_ahorro_usd, 2),
-            "liberamos_horas_anual": total_horas_ahorro,
-            "evitamos_usd": round(evitamos_usd, 2),
-            "evitamos_vs_freelancer": round(ahorro_vs_freelancer, 2),
-            "evitamos_vs_empresa": round(ahorro_vs_empresa, 2),
-            "evitamos_vs_app": round(ahorro_vs_app_real, 2),
+            "alcance": "realizado",
+            "casos_entregados": casos_entregados,
+            "invertimos_usd": round(p_inv, 2),
+            "invertimos_horas_dev": p_horas_inv,
+            "conocimiento_usd": round(p_conocimiento_usd, 2),
+            "conocimiento_horas": round(p_discovery_horas, 1),
+            "liberamos_usd_anual": round(p_ahorro_usd, 2),
+            "liberamos_horas_anual": p_horas_ahorro,
+            "roi_usd": round(p_roi, 2),
+            "evitamos_usd": round(p_evitamos_usd, 2),
+            "evitamos_vs_freelancer": round(p_vs_freelancer, 2),
+            "evitamos_vs_empresa": round(p_vs_empresa, 2),
+            "evitamos_vs_app": round(p_vs_app, 2),
         },
         "comparativo_total": {
             "ahorro_vs_freelancer_usd": round(ahorro_vs_freelancer, 2),

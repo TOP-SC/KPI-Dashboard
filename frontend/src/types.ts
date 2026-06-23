@@ -143,12 +143,15 @@ export interface DashboardData {
     casos_roi_negativo: number
     por_estado: Record<string, number>
     pizarra: {
+      alcance: 'realizado'
+      casos_entregados: number
       invertimos_usd: number
       invertimos_horas_dev: number
       conocimiento_usd: number
       conocimiento_horas: number
       liberamos_usd_anual: number
       liberamos_horas_anual: number
+      roi_usd: number
       evitamos_usd: number
       evitamos_vs_freelancer: number
       evitamos_vs_empresa: number
